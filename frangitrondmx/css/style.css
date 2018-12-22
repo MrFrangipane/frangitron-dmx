@@ -2,6 +2,12 @@
   color: white;
   background-color: black;
   font-family: sans-serif;
+  text-align: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .active {
@@ -15,4 +21,9 @@ input[type=button], input[type=submit], input[type=reset] {
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
+  font-size: large;
+}
+
+.footer {
+  font-size: smaller;
 }
