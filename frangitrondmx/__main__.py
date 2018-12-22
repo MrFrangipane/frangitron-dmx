@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 namespace = '/frangitron-dmx'
-js_file_uuid = str(uuid())
+static_file_uuid = str(uuid())
 
 
 @app.route('/js/<path:path>')
@@ -20,12 +20,17 @@ def _js(path):
     return send_from_directory('js', path)
 
 
+@app.route('/css/<path:path>')
+def _css(path):
+    return send_from_directory('css', path)
+
+
 @app.route('/')
 def index():
     return render_template(
         'index.html',
         async_mode=socketio.async_mode,
-        uuid=js_file_uuid
+        uuid=static_file_uuid
     )
 
 
@@ -36,7 +41,8 @@ def test_message(message):
         'my_response',
         {
             'data': message['data'],
-            'count': session['receive_count']
+            'count': session['receive_count'],
+            'type': 'connection'
         }
     )
 
@@ -48,7 +54,8 @@ def test_broadcast_message(message):
         'my_response',
         {
             'data': message['data'],
-            'count': session['receive_count']
+            'count': session['receive_count'],
+            'type': 'broadcast'
         },
         broadcast=True
     )

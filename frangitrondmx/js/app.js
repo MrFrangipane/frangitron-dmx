@@ -15,7 +15,16 @@ $(document).ready(function() {
     // to the client. The data is then displayed in the "Received"
     // section of the page.
     socket.on('my_response', function(msg) {
-        $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+        if ( msg.type == 'broadcast' ) {
+            // RESET STYLES
+            $('form').each(function() {
+                $('#' + this.id).removeClass('active');
+            });
+            // SET SENDER ACTIVE
+            if ( !$('#' + msg.data).hasClass('active') ) {
+                $('#' + msg.data).addClass('active')
+            }
+        }
     });
 
     // Interval function that tests message latency by sending a "ping"

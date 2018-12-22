@@ -5,20 +5,21 @@
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/socket.io.min.js"></script>
     <script type="text/javascript" src="js/app.js?{{ uuid }}"></script>
+    <link rel="stylesheet" href="css/style.css?{{ uuid }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-    <h1>Flask-SocketIO Test</h1>
-    <p>Async mode: <b>{{ async_mode }}</b></p>
-    <p>Latency: <b><span id="latency"></span> ms</b> <i>(<span id="latency-avg"></span> ms avg)</i></p>
-    <h2>Send:</h2>
+    <h1>Frangitron DMX</h1>
 
     <form id="program1" method="POST" action='#'><input type="submit" value="Program 01"></form>
     <form id="program2" method="POST" action='#'><input type="submit" value="Program 02"></form>
 
-    <form id="disconnect" method="POST" action="#">
-        <input type="submit" value="Disconnect">
-    </form>
-    <h2>Receive:</h2>
-    <div id="log"></div>
+    <div>
+        Latency: <b><span id="latency"></span> ms</b> <i>(<span id="latency-avg"></span> ms avg)</i>
+
+        <form id="disconnect" method="POST" action="#">
+            <input type="submit" value="Disconnect">
+        </form>
+    </div>
 </body>
 </html>
