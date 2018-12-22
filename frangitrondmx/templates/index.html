@@ -19,7 +19,8 @@
         <tr>
             <td width="300px"><b><span id="latency"></span> ms</b><br/><i><span id="latency-avg"></span> ms avg</i></td>
             <td>http://{{ ip_address }}:5000/</td>
-            <td><form id="disconnect" method="POST" action="#"><input type="submit" value="Disconnect"></form></td>
+            <!--<td><form id="disconnect" method="POST" action="#"><input type="submit" value="Disconnect"></form></td>-->
+            <td><button onclick="location.reload();">Refresh</button></td>
         </tr>
     </table>
 </body>
