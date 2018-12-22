@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from uuid import uuid4 as uuid
+from subprocess import check_output, CalledProcessError
 from flask import Flask, render_template, session, request, send_from_directory
 from flask_socketio import SocketIO, emit, disconnect
 
@@ -14,6 +15,13 @@ socketio = SocketIO(app, async_mode=async_mode)
 namespace = '/frangitron-dmx'
 static_file_uuid = str(uuid())
 status = dict()
+
+def _ip_address():
+    cmd = "hostname -I"
+    try:
+        return check_output(cmd, shell=True).decode('utf-8')
+    except CalledProcessError:
+        return "[ip unavailable]"
 
 
 @app.route('/js/<path:path>')
@@ -34,12 +42,12 @@ def index():
         status['selected_program'] = -1
 
     if request.args.get('landscape', False):
-        column_count = 3
-    else:
         column_count = 2
+    else:
+        column_count = 4
 
     cell_template = \
-        "<td>" \
+        "<td class='{width}'>" \
         "<form method='POST' action='#'><input id='{program_name}' type='submit' value='{program_name}' class='{class_}'></form>" \
         "</td>"
 
@@ -55,16 +63,20 @@ def index():
 
             cells[row].append(cell_template.format(
                 program_name=status['programs'][program_index],
-                class_='active' if status['selected_program'] == program_index else ''
+                class_='active' if status['selected_program'] == program_index else '',
+                width='two' if request.args.get('landscape', False) else 'four'
             ))
 
-    programs_table = "<table><tr>{rows}</tr></table>".format(rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells]))
+    programs_table = "<table><tr>{rows}</tr></table>".format(
+        rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells])
+    )
 
     return render_template(
         'index.html',
         async_mode=socketio.async_mode,
         uuid=static_file_uuid,
-        programs_table=programs_table
+        programs_table=programs_table,
+        ip_address=_ip_address()
     )
 
 
