@@ -42,9 +42,9 @@ def index():
         status['selected_program'] = -1
 
     if request.args.get('landscape', False):
-        column_count = 2
-    else:
         column_count = 4
+    else:
+        column_count = 2
 
     cell_template = \
         "<td class='{width}'>" \
@@ -54,12 +54,12 @@ def index():
     row_count = len(status['programs']) / column_count
     cells = list()
 
-    for row in range(row_count):
+    for row in range(row_count + 1):
         cells.append(list())
 
         for col in range(column_count):
             program_index = row * column_count + col
-            if program_index > len(status['programs']): break
+            if program_index >= len(status['programs']): continue
 
             cells[row].append(cell_template.format(
                 program_name=status['programs'][program_index],
