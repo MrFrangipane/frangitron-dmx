@@ -38,7 +38,8 @@ $(document).ready(function() {
         var sum = 0;
         for (var i = 0; i < ping_pong_times.length; i++)
             sum += ping_pong_times[i];
-        $('#latency').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+        $('#latency-avg').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+        $('#latency').text((10 * latency) / 10);
     });
 
     $('form#broadcast').submit(function(event) {

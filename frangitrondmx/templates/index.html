@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>Flask-SocketIO Test</h1>
-    <p>Async mode is: <b>{{ async_mode }}</b></p>
-    <p>Latency: <b><span id="latency"></span>ms</b></p>
+    <p>Async mode: <b>{{ async_mode }}</b></p>
+    <p>Latency: <b><span id="latency"></span> ms</b> <i>(<span id="latency-avg"></span> ms avg)</i></p>
     <h2>Send:</h2>
 
     <form id="broadcast" method="POST" action='#'>
