@@ -1,0 +1,13 @@
+[Unit]
+Description=Frangitron DMX
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/pi/dmxenv
+ExecStart=/home/pi/dmxenv/bin/python -m frangitrondmx
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
