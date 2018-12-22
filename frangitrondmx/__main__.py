@@ -19,7 +19,7 @@ status = dict()
 def _ip_address():
     cmd = "hostname -I"
     try:
-        return check_output(cmd, shell=True).decode('utf-8')
+        return check_output(cmd, shell=True).decode('utf-8').strip(" ")
     except CalledProcessError:
         return "[ip unavailable]"
 
