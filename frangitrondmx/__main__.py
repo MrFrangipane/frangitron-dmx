@@ -64,7 +64,7 @@ def index():
             cells[row].append(cell_template.format(
                 program_name=status['programs'][program_index],
                 class_='active' if status['selected_program'] == program_index else '',
-                width='two' if request.args.get('landscape', False) else 'four'
+                width='four' if request.args.get('landscape', False) else 'two'
             ))
 
     programs_table = "<table><tr>{rows}</tr></table>".format(
