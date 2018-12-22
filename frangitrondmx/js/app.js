@@ -17,9 +17,10 @@ $(document).ready(function() {
     socket.on('my_response', function(msg) {
         if ( msg.type == 'broadcast' ) {
             // RESET STYLES
-            $('form').each(function() {
-                $('#' + this.id).removeClass('active');
+            $('input').each(function() {
+                $(this).removeClass('active');
             });
+
             // SET SENDER ACTIVE
             if ( !$('#' + msg.data).hasClass('active') ) {
                 $('#' + msg.data).addClass('active')
@@ -32,10 +33,13 @@ $(document).ready(function() {
     // round trip time is measured.
     var ping_pong_times = [];
     var start_time;
-    window.setInterval(function() {
-        start_time = (new Date).getTime();
-        socket.emit('ping');
-    }, 1000);
+    window.setInterval(
+        function() {
+            start_time = (new Date).getTime();
+            socket.emit('ping');
+        },
+        1000
+    );
 
     // Handler for the "pong" message. When the pong is received, the
     // time from the ping is stored, and the average of the last 30
@@ -58,7 +62,10 @@ $(document).ready(function() {
             socket.emit('disconnect_request');
         }
         else {
-            socket.emit('broadcast', {data: this.id});
+            socket.emit(
+                'broadcast',
+                {data: $(this).find("input")[0].id}
+            );
         }
 
         return false;

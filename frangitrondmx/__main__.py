@@ -13,6 +13,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 namespace = '/frangitron-dmx'
 static_file_uuid = str(uuid())
+status = dict()
 
 
 @app.route('/js/<path:path>')
@@ -27,10 +28,43 @@ def _css(path):
 
 @app.route('/')
 def index():
+    global status
+    if not status.get('programs', False):
+        status['programs'] = ['Get-out', 'Chatty', 'Lounge', 'Club', 'Apocalypse', 'Searchlight']
+        status['selected_program'] = -1
+
+    if request.args.get('landscape', False):
+        column_count = 3
+    else:
+        column_count = 2
+
+    cell_template = \
+        "<td>" \
+        "<form method='POST' action='#'><input id='{program_name}' type='submit' value='{program_name}' class='{class_}'></form>" \
+        "</td>"
+
+    row_count = len(status['programs']) / column_count
+    cells = list()
+
+    for row in range(row_count):
+        cells.append(list())
+
+        for col in range(column_count):
+            program_index = row * column_count + col
+            if program_index > len(status['programs']): break
+
+            cells[row].append(cell_template.format(
+                program_name=status['programs'][program_index],
+                class_='active' if status['selected_program'] == program_index else ''
+            ))
+
+    programs_table = "<table><tr>{rows}</tr></table>".format(rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells]))
+
     return render_template(
         'index.html',
         async_mode=socketio.async_mode,
-        uuid=static_file_uuid
+        uuid=static_file_uuid,
+        programs_table=programs_table
     )
 
 
@@ -49,7 +83,9 @@ def test_message(message):
 
 @socketio.on('broadcast', namespace=namespace)
 def test_broadcast_message(message):
+    global status
     session['receive_count'] = session.get('receive_count', 0) + 1
+    status['selected_program'] = status['programs'].index(message['data'])
     emit(
         'my_response',
         {

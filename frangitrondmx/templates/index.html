@@ -6,31 +6,18 @@
     <script type="text/javascript" src="js/socket.io.min.js"></script>
     <script type="text/javascript" src="js/app.js?{{ uuid }}"></script>
     <link rel="stylesheet" href="css/style.css?{{ uuid }}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.5, minimum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
     <h1>Frangitron DMX</h1>
 
-    <table>
-        <tr>
-            <td><form id="program1" method="POST" action='#'><input type="submit" value="Program 01"></form></td>
-            <td><form id="program2" method="POST" action='#'><input type="submit" value="Program 02"></form></td>
-            <td><form id="program3" method="POST" action='#'><input type="submit" value="Program 01"></form></td>
-            <td><form id="program4" method="POST" action='#'><input type="submit" value="Program 02"></form></td>
-        </tr>
-        <tr>
-            <td><form id="program5" method="POST" action='#'><input type="submit" value="Program 01"></form></td>
-            <td><form id="program6" method="POST" action='#'><input type="submit" value="Program 02"></form></td>
-            <td><form id="program7" method="POST" action='#'><input type="submit" value="Program 01"></form></td>
-            <td><form id="program8" method="POST" action='#'><input type="submit" value="Program 02"></form></td>
-        </tr>
-    </table>
+    {{ programs_table|safe }}
 
     <hr>
 
     <table class="footer">
         <tr>
-            <td width="300px">Latency: <b><span id="latency"></span> ms</b> <i>(<span id="latency-avg"></span> ms avg)</i></td>
+            <td width="300px"><b><span id="latency"></span> ms</b> <i>(<span id="latency-avg"></span> ms avg)</i></td>
             <td><form id="disconnect" method="POST" action="#"><input type="submit" value="Disconnect"></form></td>
         </tr>
     </table>
