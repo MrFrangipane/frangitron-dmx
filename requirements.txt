@@ -1,3 +1,4 @@
 eventlet
 flask
 flask-socketio
+pyftdi==0.13.4
