@@ -39,10 +39,13 @@ def index():
 
     if request.args.get('raspberrypi', False):
         column_count = 4
-        reboot_gnome_ = "<td><form method='POST' action='#'><input id='reboot-gnome' type='submit' value='Reboot GNOME'></form></td>"
+        footer = "<td><form method='POST' action='#'><input id='reboot-gnome' type='submit' value='Reboot GNOME' class='raspi-only footer'></form></td>"
+        footer += "<td class='footer'><b><span id='latency'></span> ms</b>&nbsp;/&nbsp;<i><span id='latency-avg'></span> ms avg</i></td>"
+        footer += "<td><form method='POST' action='#'><input id='shutdown' type='submit' value='Shutdown' class='raspi-only footer'></form></td>"
     else:
         column_count = 2
-        reboot_gnome_ = ""
+        footer = "<td></td>"
+        footer += "<td class='footer'><b><span id='latency'></span> ms</b>&nbsp;/&nbsp;<i><span id='latency-avg'></span> ms avg</i></td>"
 
     cell_template = \
         "<td class='{width}'>" \
@@ -77,7 +80,7 @@ def index():
         uuid=_static_file_uuid,
         programs_table=programs_table,
         ip_address=_ip_address(),
-        raspi_config=reboot_gnome_
+        footer=footer
     )
 
 
@@ -116,6 +119,15 @@ def reboot_gnome():
             '/home/pi/.config/lxsession/LXDE-pi/autostart.disabled',
         )
     os.system('reboot now')
+
+
+@_socketio.on('shutdown', namespace=_namespace)
+def shutdown():
+    os.system("shutdown now")
+
+
+def update():
+    os.system("/home/pi/dmxenv/bin/pip install git+http://github.com/mrfrangipane/frangitron-dmx.git")
 
 
 def serve_webapp(streamer):

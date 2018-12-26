@@ -37,6 +37,11 @@ input[type=submit].active {
   border-radius: 5px;
 }
 
-.footer {
+input[type=submit].footer , .footer {
   font-size: smaller;
+}
+
+.raspi-only {
+  color: darkgrey;
+  border-radius: 5px;
 }
