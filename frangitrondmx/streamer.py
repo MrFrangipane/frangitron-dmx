@@ -26,14 +26,21 @@ class InterfaceThread(Thread):
         self.parent = parent
         self.dmx = interface.Interface()
         self.start_time = time.time()
-        atexit.register(self.dmx.close())
+        self.is_running = True
+        atexit.register(self.stop())
 
     def run(self):
-        while True:
+        while self.is_running:
             elapsed = time.time() - self.start_time
             universe = self.parent.compute_at(elapsed)[:]
             self.dmx.stream(universe)
             time.sleep(1 / float(interface.FRAMERATE))
+
+        self.dmx.close()
+        print "Interface Thread Stopped"
+
+    def stop(self):
+        self.is_running = False
 
 
 class Streamer(object):
