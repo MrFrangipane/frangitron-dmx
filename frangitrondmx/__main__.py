@@ -1,6 +1,6 @@
 from streamer import Streamer
-from webapp import main
+from webapp import serve_webapp
 
 
 if __name__ == '__main__':
-    main(Streamer())
+    serve_webapp(Streamer())

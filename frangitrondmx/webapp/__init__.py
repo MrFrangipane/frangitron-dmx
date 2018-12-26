@@ -60,7 +60,7 @@ def index():
 
             cells[row].append(cell_template.format(
                 program_name=_streamer.programs[program_index],
-                class_='active' if _streamer.selected_program == program_index else '',
+                class_='active' if _streamer.selected_program_id == program_index else '',
                 width='four' if request.args.get('landscape', False) else 'two'
             ))
 
@@ -98,7 +98,7 @@ def ping_pong():
     emit('pong')
 
 
-def main(streamer):
+def serve_webapp(streamer):
     global _streamer
     _streamer = streamer
     _socketio.run(_app, debug=True, host='0.0.0.0')

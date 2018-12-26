@@ -10,7 +10,7 @@ from pyftdi.ftdi import Ftdi
 
 VENDOR = 0x0403
 PRODUCT = 0x6001
-FRAMERATE = 90
+FRAMERATE = 100
 
 
 class Interface(object):
