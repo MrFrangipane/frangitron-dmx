@@ -104,7 +104,7 @@ def ping_pong():
 
 @_socketio.on('raspi-config', namespace=_namespace)
 def raspi_config():
-    Popen('sudo raspi-config', shell=True)
+    Popen('sudo su pi startx', shell=True)
 
 
 def serve_webapp(streamer):
