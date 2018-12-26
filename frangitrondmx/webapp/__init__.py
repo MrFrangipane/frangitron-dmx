@@ -1,5 +1,5 @@
 from uuid import uuid4 as uuid
-from subprocess import check_output, CalledProcessError
+from subprocess import check_output, CalledProcessError, Popen
 from flask import Flask, render_template, request, send_from_directory
 from flask_socketio import SocketIO, emit
 
@@ -36,10 +36,12 @@ def index():
     if not _streamer.programs:
         _streamer.load()
 
-    if request.args.get('landscape', False):
+    if request.args.get('raspberrypi', False):
         column_count = 4
+        raspi_config_ = "<td><form method='POST' action='#'><input id='raspi-config' type='submit' value='raspi-config'></form></td>"
     else:
         column_count = 2
+        raspi_config_ = "<td><form method='POST' action='#'><input id='raspi-config' type='submit' value='raspi-config'></form></td>"
 
     cell_template = \
         "<td class='{width}'>" \
@@ -68,11 +70,13 @@ def index():
         rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells])
     )
 
+
     return render_template(
         'index.html',
         uuid=_static_file_uuid,
         programs_table=programs_table,
-        ip_address=_ip_address()
+        ip_address=_ip_address(),
+        raspi_config=raspi_config_
     )
 
 
@@ -96,6 +100,11 @@ def test_broadcast_message(message):
 @_socketio.on('ping', namespace=_namespace)
 def ping_pong():
     emit('pong')
+
+
+@_socketio.on('raspi-config', namespace=_namespace)
+def raspi_config():
+    Popen('sudo raspi-config', shell=True)
 
 
 def serve_webapp(streamer):

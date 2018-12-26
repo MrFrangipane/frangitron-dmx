@@ -42,13 +42,25 @@ $(document).ready(function() {
         $('#latency').text((10 * latency) / 10);
     });
 
-    // Program clicked
+    // Form clicked
     $('form').submit(function(event) {
-        socket.emit(
-            'program_clicked',
-            {program_name: $(this).find("input")[0].id}
-        );
+        var submit_name = $(this).find("input")[0].id;
 
+        if ( submit_name == "reload-programs" ) {
+            // Refresh
+            socket.emit('reload');
+        }
+        else if ( submit_name == "raspi-config" ) {
+            // Raspi config
+            socket.emit('raspi-config');
+        }
+        else {
+            // Program
+            socket.emit(
+                'program_clicked',
+                {program_name: submit_name}
+            );
+        }
         return false;
     });
 });

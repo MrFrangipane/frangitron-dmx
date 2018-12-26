@@ -20,6 +20,8 @@
             <td width="300px"><b><span id="latency"></span> ms</b><br/><i><span id="latency-avg"></span> ms avg</i></td>
             <td>http://{{ ip_address }}:5000/</td>
             <td><button onclick="location.reload();">Refresh</button></td>
+            <td><form method='POST' action='#'><input id='reload-programs' type='submit' value='Reload programs'></form></td>
+            {{ raspi_config|safe }}
         </tr>
     </table>
 </body>
