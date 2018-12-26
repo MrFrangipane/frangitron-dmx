@@ -54,9 +54,9 @@ $(document).ready(function() {
             // Reboot GNOME
             socket.emit('reboot-gnome');
         }
-        else if ( submit_name == "shutdown" ) {
+        else if ( submit_name == "restart-service" ) {
             // Shutdown
-            socket.emit('shutdown');
+            socket.emit('restart-service');
         }
         else {
             // Program
