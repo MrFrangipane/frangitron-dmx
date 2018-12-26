@@ -21,11 +21,13 @@ To be :
 
 ## Programs
 
-Range and value are based on evil `eval` where `elapsed` is time in seconds and `math` is the `math` module
+**A program is a set of channels associated to expressions.**
+
+Channels and values are based on evil `eval` where `elapsed` is time in seconds and `math` is the `math` module
 
 Each frame, values are computed according to selected program and expressions.
 
-Universe is not reset each frame, which means that for blackout you need to assign `"0"` to all relevant channels
+Universe expressions are not reset each program change, which means that for blackout you need to assign `"0"` to all relevant channels
 
 This allows to fire specific fixtures without affecting other fictures (see Smoke on / off in example)
 
