@@ -105,10 +105,16 @@ def ping_pong():
 
 @_socketio.on('reboot-gnome', namespace=_namespace)
 def reboot_gnome():
-    os.rename(
-        '/home/pi/.config/lxsession/LXDE-pi/autostart',
-        '/home/pi/.config/lxsession/LXDE-pi/autostart.disabled',
-    )
+    if os.path.isfile('/home/pi/.config/lxsession/LXDE-pi/autostart.disabled'):
+        os.rename(
+            '/home/pi/.config/lxsession/LXDE-pi/autostart.disabled',
+            '/home/pi/.config/lxsession/LXDE-pi/autostart'
+        )
+    else:
+        os.rename(
+            '/home/pi/.config/lxsession/LXDE-pi/autostart',
+            '/home/pi/.config/lxsession/LXDE-pi/autostart.disabled',
+        )
     os.system('reboot now')
 
 
