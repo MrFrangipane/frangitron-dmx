@@ -29,9 +29,9 @@ Each frame, values are computed according to selected program and expressions.
 
 Universe expressions are not reset each program change, which means that for blackout you need to assign `"0"` to all relevant channels
 
-This allows to fire specific fixtures without affecting other fictures (see Smoke on / off in example)
+This allows to fire specific fixtures without affecting other fixtures (see Smoke on / off in example)
 
-**Spaces are not allowed in program names** _Underscores are replaced with spaces in buttons captions_
+**Spaces are not allowed in program names** but _underscores are replaced with spaces in UI captions_
 
 ````json
 {
