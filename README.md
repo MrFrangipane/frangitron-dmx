@@ -21,19 +21,34 @@ To be :
 
 ## Programs
 
-Are based on `eval` where `elapsed` is time in seconds and `math` is the `math` module
+Range and value are based on evil `eval` where `elapsed` is time in seconds and `math` is the `math` module
+
+Each frame, values are computed according to selected program and expressions.
+
+Universe is not reset each frame, which means that for blackout you need to assign `"0"` to all relevant channels
+
+This allows to fire specific fixtures without affecting other fictures (see Smoke on / off in example)
+
+**Spaces are not allowed in program names** _Underscores are replaced with spaces in buttons captions_
 
 ````json
 {
-    "Blackout": {},
-    "GreenYellow" : {
-        "1" : "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
-        "2" : "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5"
+    "Blackout": {
+        "range(1, 256)": "0"
+    },
+    "Color_rotation" : {
+        "1": "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
+        "2": "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5",
+        "3": "1.0 if elapsed % 1 > 0.5 else 0.0"
     },
     "Strobe": {
-        "1" : "1.0 if elapsed % .1 > 0.05 else 0.0",
-        "2" : "1.0 if elapsed % .1 > 0.05 else 0.0",
-        "3" : "1.0 if elapsed % .1 > 0.05 else 0.0"
+        "range(1, 4)": "1.0 if elapsed % .1 > 0.05 else 0.0"
+    },
+    "Smoke_on": {
+        "16": "1"
+    },
+    "Smoke_off": {
+        "16": "0"
     }
 }
 ````

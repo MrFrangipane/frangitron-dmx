@@ -5,6 +5,7 @@ His program is published under a GPLv2 license
 """
 import time
 import math
+from usb import USBError
 from pyftdi.ftdi import Ftdi
 
 
@@ -34,8 +35,8 @@ class Interface(object):
             self.ftdi.purge_buffers()
             self.ftdi.set_rts(self.rts_state)
             self._is_open = True
-        except IOError, e:
-            print repr(e)
+        except USBError, e:
+            print e
             self._is_open = False
 
     def stream(self, universe_byte_array):

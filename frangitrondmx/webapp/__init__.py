@@ -50,7 +50,7 @@ def index():
     cell_template = \
         "<td class='{width}'>" \
             "<form method='POST' action='#'>" \
-                "<input id='{program_name}' type='submit' value='{program_name}' class='{class_}'>" \
+                "<input id='{program_name}' type='submit' value='{program_caption}' class='{class_}'>" \
             "</form>" \
         "</td>"
 
@@ -66,6 +66,7 @@ def index():
 
             cells[row].append(cell_template.format(
                 program_name=_streamer.programs[program_index],
+                program_caption=_streamer.programs[program_index].replace('_', ' '),
                 class_='active' if _streamer.selected_program_id == program_index else '',
                 width='four' if request.args.get('landscape', False) else 'two'
             ))
