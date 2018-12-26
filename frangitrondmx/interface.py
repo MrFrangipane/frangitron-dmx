@@ -52,6 +52,7 @@ class Interface(object):
         if not self._is_open: return
         self._is_open = False
         self.ftdi.close()
+        print "FTDI Closed !"
 
 
 if __name__ == '__main__':

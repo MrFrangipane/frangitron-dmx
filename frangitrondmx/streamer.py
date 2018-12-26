@@ -1,5 +1,6 @@
 import time
 import math
+import atexit
 from threading import Thread
 import interface
 
@@ -25,6 +26,7 @@ class InterfaceThread(Thread):
         self.parent = parent
         self.dmx = interface.Interface()
         self.start_time = time.time()
+        atexit.register(self.dmx.close())
 
     def run(self):
         while True:

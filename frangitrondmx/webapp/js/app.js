@@ -47,12 +47,12 @@ $(document).ready(function() {
         var submit_name = $(this).find("input")[0].id;
 
         if ( submit_name == "reload-programs" ) {
-            // Refresh
+            // Reload Configuration
             socket.emit('reload');
         }
-        else if ( submit_name == "raspi-config" ) {
-            // Raspi config
-            socket.emit('raspi-config');
+        else if ( submit_name == "reboot-gnome" ) {
+            // Reboot GNOME
+            socket.emit('reboot-gnome');
         }
         else {
             // Program

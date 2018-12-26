@@ -1,5 +1,6 @@
+import os
 from uuid import uuid4 as uuid
-from subprocess import check_output, CalledProcessError, Popen
+from subprocess import check_output, CalledProcessError
 from flask import Flask, render_template, request, send_from_directory
 from flask_socketio import SocketIO, emit
 
@@ -38,10 +39,10 @@ def index():
 
     if request.args.get('raspberrypi', False):
         column_count = 4
-        raspi_config_ = "<td><form method='POST' action='#'><input id='raspi-config' type='submit' value='raspi-config'></form></td>"
+        reboot_gnome_ = "<td><form method='POST' action='#'><input id='reboot-gnome' type='submit' value='Reboot GNOME'></form></td>"
     else:
         column_count = 2
-        raspi_config_ = "<td><form method='POST' action='#'><input id='raspi-config' type='submit' value='raspi-config'></form></td>"
+        reboot_gnome_ = ""
 
     cell_template = \
         "<td class='{width}'>" \
@@ -76,7 +77,7 @@ def index():
         uuid=_static_file_uuid,
         programs_table=programs_table,
         ip_address=_ip_address(),
-        raspi_config=raspi_config_
+        raspi_config=reboot_gnome_
     )
 
 
@@ -102,9 +103,13 @@ def ping_pong():
     emit('pong')
 
 
-@_socketio.on('raspi-config', namespace=_namespace)
-def raspi_config():
-    Popen('sudo su pi startx', shell=True)
+@_socketio.on('reboot-gnome', namespace=_namespace)
+def reboot_gnome():
+    os.rename(
+        '/home/pi/.config/lxsession/LXDE-pi/autostart',
+        '/home/pi/.config/lxsession/LXDE-pi/autostart.disabled',
+    )
+    os.system('reboot now')
 
 
 def serve_webapp(streamer):
