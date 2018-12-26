@@ -25,15 +25,15 @@ Are based on `eval` where `elapsed` is time in seconds and `math` is the `math` 
 
 ````json
 {
-    'Blackout': {},
-    'GreenYellow' : {
-        1: "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
-        2: "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5"
+    "Blackout": {},
+    "GreenYellow" : {
+        "1" : "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
+        "2" : "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5"
     },
-    'Strobe': {
-        1: "1.0 if elapsed % .1 > 0.05 else 0.0",
-        2: "1.0 if elapsed % .1 > 0.05 else 0.0",
-        3: "1.0 if elapsed % .1 > 0.05 else 0.0"
+    "Strobe": {
+        "1" : "1.0 if elapsed % .1 > 0.05 else 0.0",
+        "2" : "1.0 if elapsed % .1 > 0.05 else 0.0",
+        "3" : "1.0 if elapsed % .1 > 0.05 else 0.0"
     }
 }
 ````
