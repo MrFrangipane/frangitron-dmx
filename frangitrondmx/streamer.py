@@ -27,7 +27,7 @@ class InterfaceThread(Thread):
         self.dmx = interface.Interface()
         self.start_time = time.time()
         self.is_running = True
-        atexit.register(self.stop())
+        atexit.register(self.stop)
 
     def run(self):
         while self.is_running:
