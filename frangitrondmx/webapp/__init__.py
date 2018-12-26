@@ -123,6 +123,8 @@ def reboot_gnome():
 
 @_socketio.on('shutdown', namespace=_namespace)
 def shutdown():
+    global _streamer
+    _streamer.stop()
     os.system("shutdown now")
 
 

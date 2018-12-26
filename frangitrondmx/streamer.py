@@ -78,3 +78,6 @@ class Streamer(object):
         return {
             'selected_program': self.selected_program_name
         }
+
+    def stop(self):
+        self.interface_thread.stop()
