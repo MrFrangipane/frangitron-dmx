@@ -34,6 +34,10 @@ Universe expressions are not reset each program change, which means that for bla
 
 This allows to fire specific fixtures without affecting other fixtures (see Smoke on / off in example)
 
+Expressions are computed in `float` from 0.0 to 1.0, except if the expression starts with `$`. Then, expression ranges from `int` 0 to 255
+
+This allows to express precise values for specific fixture programs (see Absolute values in example)
+
 **Spaces are not allowed in program names** but _underscores are replaced with spaces in UI captions_
 
 ````json
@@ -54,6 +58,11 @@ This allows to fire specific fixtures without affecting other fixtures (see Smok
     },
     "Smoke_off": {
         "16": "0"
-    }
+    },
+    "Absolute_values" : {
+        "1": "$128",
+        "2": "$0",
+        "3": "$255"
+  }
 }
 ````

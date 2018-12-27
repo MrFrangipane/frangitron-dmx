@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 .idea
-.pdf
+*.pdf
 temp.json
 
 # C extensions

@@ -102,7 +102,13 @@ class Streamer(object):
 
         for channel, expression in enumerate(self.universe_expressions):
             try:
-                universe[channel] = int(255 * min(1.0, max(0.0, eval(expression))))
+                if expression[0] == '$':
+                    expression = expression[1:]
+                    factor = 1
+                else:
+                    factor = 255
+
+                universe[channel] = min(255, max(0, int(factor * eval(expression))))
             except Exception as e:
                 self.error_state = e
 

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 _NAME = "frangitrondmx"
-_VERSION = "0.13.0"
+_VERSION = "0.14.0"
 _DESCRIPTION = "Frangitron - DMX Controller"
 
 _here = path.abspath(path.dirname(__file__))
