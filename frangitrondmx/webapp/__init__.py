@@ -34,8 +34,6 @@ def _css(path):
 @_app.route('/')
 def index():
     global _streamer
-    if not _streamer.programs:
-        _streamer.load()
 
     if request.args.get('raspberrypi', False):
         column_count = 4
@@ -53,7 +51,7 @@ def index():
             "</form>" \
         "</td>"
 
-    row_count = len(_streamer.programs) / column_count
+    row_count = len(_streamer.program_names) / column_count
     cells = list()
 
     for row in range(row_count + 1):
@@ -64,16 +62,18 @@ def index():
             if program_index >= len(_streamer.programs): break
 
             cells[row].append(cell_template.format(
-                program_name=_streamer.programs[program_index],
-                program_caption=_streamer.programs[program_index].replace('_', ' '),
+                program_name=_streamer.program_names[program_index],
+                program_caption=_streamer.program_names[program_index].replace('_', ' '),
                 class_='active' if _streamer.selected_program_id == program_index else '',
                 width='four' if request.args.get('landscape', False) else 'two'
             ))
 
-    programs_table = "<table><tr>{rows}</tr></table>".format(
-        rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells])
-    )
-
+    if _streamer.programs:
+        programs_table = "<table><tr>{rows}</tr></table>".format(
+            rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells])
+        )
+    else:
+        programs_table = "<i>No program loaded</i>"
 
     return render_template(
         'index.html',

@@ -1,3 +1,4 @@
+import json
 import time
 import math
 import atexit
@@ -5,19 +6,7 @@ from threading import Thread
 import interface
 
 
-PROGRAMS = {
-    "Blackout": {
-        "range(1, 256)": "0"
-    },
-    "Color_Rotation" : {
-        "1": "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
-        "2": "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5",
-        "3": "1.0 if elapsed % 1 > 0.5 else 0.0"
-    },
-    "Strobe": {
-        "range(1, 4)": "1.0 if elapsed % .1 > 0.05 else 0.0"
-    }
-}
+PROGRAMS = {}
 
 
 class InterfaceThread(Thread):
@@ -47,27 +36,30 @@ class InterfaceThread(Thread):
 
 class Streamer(object):
 
-    def __init__(self):
-        self.programs = list()
+    def __init__(self, programs_file=None):
+        self.load(programs_file)
         self.universe_expressions = ["0"] * 512
         self.selected_program_id = -1
         self.selected_program_name = ""
 
-        self.load()
-
         self.interface_thread = InterfaceThread(parent=self)
         self.interface_thread.start()
 
-    def load(self):
-        self.programs = sorted(PROGRAMS.keys())
+    def load(self, programs_file):
+        if programs_file is not None:
+            with open(programs_file, 'r') as f_programs:
+                self.programs = json.load(f_programs)
+        else:
+            self.programs = PROGRAMS
+        self.program_names = sorted(self.programs.keys())
 
     def program_clicked(self, program_name):
-        self.selected_program_id = self.programs.index(program_name)
+        self.selected_program_id = self.program_names.index(program_name)
         self.selected_program_name = program_name
 
     def compute_at(self, elapsed):
         if self.selected_program_id != -1:
-            program = PROGRAMS[self.selected_program_name]
+            program = self.programs[self.selected_program_name]
 
             for channel_expression, value_expression in program.items():
                 channels = eval(channel_expression)
