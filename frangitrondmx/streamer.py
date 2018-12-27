@@ -8,6 +8,8 @@ import interface
 
 
 PROGRAMS = {}
+cos2 = lambda x: math.cos(x) * 0.5 + 0.5
+sin2 = lambda x: math.sin(x) * 0.5 + 0.5
 
 
 class InterfaceThread(Thread):

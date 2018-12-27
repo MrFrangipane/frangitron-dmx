@@ -30,6 +30,11 @@ Channels and values are based on evil `eval` where `elapsed` is time in seconds 
 
 Each frame, values are computed according to selected program and expressions.
 
+Proxy functions are implemented
+
+- `cos2(x)` : `math.cos` expressed between 0.0 and 1.0, to avoid negative values
+- `sin2(x)` : `math.sin` expressed between 0.0 and 1.0, to avoid negative values
+
 Universe expressions are not reset each program change, which means that for blackout you need to assign `"0"` to all relevant channels
 
 This allows to fire specific fixtures without affecting other fixtures (see Smoke on / off in example)
@@ -61,8 +66,8 @@ This allows to express precise values for specific fixture programs (see Absolut
     },
     "Absolute_values" : {
         "1": "$128",
-        "2": "$0",
-        "3": "$255"
+        "2": "cos2(elapsed)",
+        "3": "sin2(elapsed)"
   }
 }
 ````
