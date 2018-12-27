@@ -23,7 +23,10 @@ To be :
 
 **A program is a set of channels associated to expressions.**
 
-Channels and values are based on evil `eval` where `elapsed` is time in seconds and `math` is the `math` module
+Channels and values are based on evil `eval` where `elapsed` is time in seconds and those modules are available
+
+- `math`
+- `random`
 
 Each frame, values are computed according to selected program and expressions.
 

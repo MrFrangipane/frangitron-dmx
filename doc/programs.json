@@ -1,6 +1,6 @@
 {
   "Blackout": {
-    "range(1, 256)": "0"
+    "range(1, 512)": "0"
   },
   "Color_Rotation" : {
     "1": "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",

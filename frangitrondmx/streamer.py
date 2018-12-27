@@ -1,6 +1,7 @@
 import json
 import time
 import math
+import random
 import atexit
 from threading import Thread
 import interface
@@ -105,7 +106,10 @@ class Streamer(object):
             except Exception as e:
                 self.error_state = e
 
-        return universe
+        if self.error_state is None:
+            return universe
+        else:
+            return bytearray([0] * 513)
 
     def ui_status(self):
         return {

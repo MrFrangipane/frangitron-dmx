@@ -50,7 +50,6 @@ class MainWindow(QWidget):
 
     def tick(self):
         self.streamer.load(programs_source=self.text.toPlainText())
-        self.streamer.program_clicked("1")
 
         if self.streamer.error_state is None:
             self.status.setStyleSheet("background-color: green; color: white; padding: 5px")
@@ -58,6 +57,8 @@ class MainWindow(QWidget):
         else:
             self.status.setStyleSheet("background-color: red; color: white; padding: 5px")
             self.status.setText(str(self.streamer.error_state))
+
+        self.streamer.program_clicked("1")
 
         if self.filename is None: return
 
