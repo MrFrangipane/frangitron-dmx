@@ -1,0 +1,18 @@
+{
+  "Blackout": {
+    "range(1, 256)": "0"
+  },
+  "Color_Rotation" : {
+    "1": "0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5",
+    "2": "0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5",
+    "3": "1.0 if elapsed % 1 > 0.5 else 0.0"
+  },
+  "Color_stepping" : {
+    "1": "1.0 if (elapsed * 0.3) % 1 > 0.25 else 0.0",
+    "2": "1.0 if (elapsed * 0.5) % 1 > 0.50 else 0.0",
+    "3": "1.0 if (elapsed * 0.2) % 1 > 0.75 else 0.0",
+    "384": "1.0 if (elapsed * 0.3) % 1 > 0.75 else 0.0",
+    "385": "1.0 if (elapsed * 0.5) % 1 > 0.50 else 0.0",
+    "386": "1.0 if (elapsed * 0.2) % 1 > 0.25 else 0.0"
+  }
+}

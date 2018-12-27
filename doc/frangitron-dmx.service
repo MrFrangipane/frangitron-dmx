@@ -6,7 +6,7 @@ After=syslog.target network.target
 Type=simple
 User=root
 WorkingDirectory=/home/pi/dmxenv
-ExecStart=/home/pi/dmxenv/bin/python -m frangitrondmx
+ExecStart=/home/pi/dmxenv/bin/python -m frangitrondmx /home/pi/dmx-programs.json
 TimeoutStopSec=2
 
 [Install]
