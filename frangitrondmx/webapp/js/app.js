@@ -48,7 +48,11 @@ $(document).ready(function() {
 
         if ( submit_name == "reload-programs" ) {
             // Reload Configuration
-            socket.emit('reload');
+            socket.emit('reload-programs');
+        }
+        else if ( submit_name == "shutdown" ) {
+            // Shutdown
+            socket.emit('shutdown');
         }
         else if ( submit_name == "reboot-gnome" ) {
             // Reboot GNOME

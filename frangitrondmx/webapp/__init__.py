@@ -39,13 +39,12 @@ def index():
 
     if request.args.get('raspberrypi', False):
         column_count = 4
-        footer = "<td><form method='POST' action='#'><input id='reboot-gnome' type='submit' value='Reboot GNOME' class='raspi-only footer'></form></td>"
-        footer += "<td class='footer'><b><span id='latency'></span> ms</b>&nbsp;/&nbsp;<i><span id='latency-avg'></span> ms avg</i></td>"
+        footer = "<td><input id='reboot-gnome' type='submit' value='Reboot GNOME' class='raspi-only footer'></form></td>"
+        footer += "<td><form method='POST' action='#'><input id='shutdown' type='submit' value='Shutdown' class='raspi-only footer'></form></td>"
         footer += "<td><form method='POST' action='#'><input id='restart-service' type='submit' value='Restart service' class='raspi-only footer'></form></td>"
     else:
         column_count = 2
         footer = "<td></td>"
-        footer += "<td class='footer'><b><span id='latency'></span> ms</b>&nbsp;/&nbsp;<i><span id='latency-avg'></span> ms avg</i></td>"
 
     cell_template = \
         "<td class='{width}'>" \
@@ -127,6 +126,13 @@ def restart_service():
     global _streamer
     _streamer.stop()
     os.system("systemctl restart frangitron-dmx")
+
+
+@_socketio.on('shutdown', namespace=_namespace)
+def shutdown():
+    global _streamer
+    _streamer.stop()
+    os.system("shutdown now")
 
 
 def update():
