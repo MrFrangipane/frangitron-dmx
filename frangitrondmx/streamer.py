@@ -22,7 +22,6 @@ class InterfaceThread(Thread):
         while self.is_running:
             elapsed = time.time() - self.start_time
             universe = self.parent.compute_at(elapsed)
-
             self.dmx.stream(universe)
 
             time.sleep(1 / float(interface.FRAMERATE))
@@ -92,10 +91,13 @@ class Streamer(object):
                 try:
                     for channel in iter(channels):
                         self.universe_expressions[channel] = value_expression
-                except TypeError:
-                    self.universe_expressions[channels] = value_expression
+                except Exception as e:
+                    try:
+                        self.universe_expressions[channels] = value_expression
+                    except Exception as e:
+                        self.error_state = e
 
-        universe = bytearray([0] * 512)
+        universe = bytearray([0] * 513)
 
         for channel, expression in enumerate(self.universe_expressions):
             try:

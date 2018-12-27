@@ -5,6 +5,7 @@ __pycache__/
 
 .idea
 .pdf
+temp.json
 
 # C extensions
 *.so
