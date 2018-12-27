@@ -1,3 +1,4 @@
+from time import sleep
 from PySide.QtGui import QApplication, QWidget, QVBoxLayout, QLabel, QPlainTextEdit, QFont
 from PySide.QtCore import QTimer
 from streamer import Streamer
@@ -10,6 +11,7 @@ TEMPLATE = """{
     "3": "1.0"
   }
 }"""
+BLACKOUT = '{ "1": {"range(1, 512)": "0"}}'
 FRAMERATE = 30
 
 
@@ -46,7 +48,7 @@ class MainWindow(QWidget):
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.tick)
-        self.timer.start(1000 / FRAMERATE)
+        self.timer.start(1000.0 / float(FRAMERATE))
 
     def tick(self):
         self.streamer.load(programs_source=self.text.toPlainText())
@@ -64,6 +66,14 @@ class MainWindow(QWidget):
 
         with open(self.filename, 'w') as f_programs:
             f_programs.write(self.text.toPlainText())
+
+    def closeEvent(self, event):
+        self.timer.stop()
+        self.streamer.load(programs_source=BLACKOUT)
+        self.streamer.program_clicked("1")
+        sleep(2.0 / float(FRAMERATE))
+        self.streamer.stop()
+        event.accept()
 
 
 def launch_editor(filename=None):
