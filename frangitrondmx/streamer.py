@@ -41,28 +41,54 @@ class Streamer(object):
         self.universe_expressions = ["0"] * 512
         self.selected_program_id = -1
         self.selected_program_name = ""
+        self.error_state = None
 
         self.interface_thread = InterfaceThread(parent=self)
         self.interface_thread.start()
 
-    def load(self, programs_file):
+    def load(self, programs_file=None, programs_source=None):
         if programs_file is not None:
-            with open(programs_file, 'r') as f_programs:
-                self.programs = json.load(f_programs)
+            try:
+                with open(programs_file, 'r') as f_programs:
+                    self.programs = json.load(f_programs)
+            except ValueError, e:
+                self.error_state = e
+                self.programs = dict()
+
+        elif programs_source is not None:
+            try:
+                self.programs = json.loads(programs_source)
+            except ValueError, e:
+                self.error_state = e
+                self.programs = dict()
+
         else:
             self.programs = PROGRAMS
+
         self.program_names = sorted(self.programs.keys())
 
     def program_clicked(self, program_name):
-        self.selected_program_id = self.program_names.index(program_name)
-        self.selected_program_name = program_name
+        try:
+            self.selected_program_id = self.program_names.index(program_name)
+            self.selected_program_name = program_name
+        except ValueError as e:
+            self.error_state = e
+            self.selected_program_id = -1
+            self.selected_program_name = ""
 
     def compute_at(self, elapsed):
+        self.error_state = None
+
         if self.selected_program_id != -1:
             program = self.programs[self.selected_program_name]
 
             for channel_expression, value_expression in program.items():
-                channels = eval(channel_expression)
+                try:
+                    channels = eval(channel_expression)
+                except Exception as e:
+                    self.error_state = e
+                    continue
+
                 try:
                     for channel in iter(channels):
                         self.universe_expressions[channel] = value_expression
@@ -72,7 +98,10 @@ class Streamer(object):
         universe = bytearray([0] * 512)
 
         for channel, expression in enumerate(self.universe_expressions):
-            universe[channel] = int(255 * min(1.0, max(0.0, eval(expression))))
+            try:
+                universe[channel] = int(255 * min(1.0, max(0.0, eval(expression))))
+            except Exception as e:
+                self.error_state = e
 
         return universe
 
