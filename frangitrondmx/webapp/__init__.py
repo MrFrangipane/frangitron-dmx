@@ -142,4 +142,10 @@ def update():
 def serve_webapp(streamer):
     global _streamer
     _streamer = streamer
-    _socketio.run(_app, debug=True, host='0.0.0.0')
+
+    _socketio.run(
+        _app,
+        debug=True,
+        use_reloader = False,
+        host='0.0.0.0'
+    )
