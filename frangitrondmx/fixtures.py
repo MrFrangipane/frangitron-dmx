@@ -1,5 +1,10 @@
 
 
+def _indent(text, spaces=2):
+    """Indents given text"""
+    return '\n'.join([' ' * spaces + line for line in text.split('\n')])
+
+
 def _doc(doc_item):
     """Helper to parse doc as list in JSON files"""
     if isinstance(doc_item, list):
@@ -23,9 +28,9 @@ class Channel(object):
         new_channel._doc = _doc(data['doc'])
         return new_channel
 
-    def doc(self):
+    def doc(self, offset=0):
         doc = "Channel {number:03d} (.{name}) : {role}\n".format(
-            number=self.number,
+            number=self.number + offset,
             name=self.name,
             role=self.role
         )
@@ -44,6 +49,7 @@ class Fixture(object):
 
     def __init__(self, name):
         self.name = name
+        self.address = 1
         self._doc = ""
         self._indexed_mapping = list()
         self._named_mapping = dict()
@@ -86,9 +92,10 @@ class Fixture(object):
         doc = self.name + '\n'
         doc += self._doc + '\n'
 
-        for chan_doc in [chan.doc() for chan in self.channels() if chan is not None]:
+        channel_docs = [channel.doc(offset=self.address - 1) for channel in self.channels() if channel is not None]
+        for channel_doc in channel_docs:
             doc += '\n'
-            doc += '\n'.join(['  ' + line for line in chan_doc.split('\n')]) + '\n'
+            doc += _indent(channel_doc) + '\n'
 
         return doc
 
@@ -106,4 +113,5 @@ if __name__ == '__main__':
         data = json.load(f_fixture)
 
     fixture = Fixture.from_dict(data)
+    fixture.address = 20
     print fixture.doc()

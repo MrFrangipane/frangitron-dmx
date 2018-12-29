@@ -1,5 +1,5 @@
 from time import sleep
-from PySide.QtGui import QApplication, QWidget, QVBoxLayout, QLabel, QPlainTextEdit, QFont
+from PySide.QtGui import QApplication, QWidget, QGridLayout, QLabel, QPlainTextEdit, QFont, QComboBox, QSpinBox
 from PySide.QtCore import QTimer
 from streamer import Streamer
 
@@ -16,15 +16,12 @@ FRAMERATE = 30
 
 
 class MainWindow(QWidget):
-    def __init__(self, filename=None, parent=None):
+    def __init__(self, fixtures_folder, filename, parent=None):
         QWidget.__init__(self, parent)
 
         self.filename = filename
-        if self.filename:
-            with open(self.filename, 'r') as f_program:
-                text = f_program.read()
-        else:
-            text = TEMPLATE
+        with open(self.filename, 'r') as f_program:
+            text = f_program.read()
 
         self.setWindowTitle("Frangitron DMX program editor")
 
@@ -36,19 +33,45 @@ class MainWindow(QWidget):
         self.text.setStyleSheet("color: white; background-color: rgb(30, 30, 30)")
         self.text.setPlainText(text)
 
+        self.combo_fixture = QComboBox()
+        self.spinner_offset = QSpinBox()
+        self.spinner_offset.setMinimum(1)
+        self.spinner_offset.setMaximum(512)
+        self.spinner_offset.setValue(1)
+        self.spinner_offset.valueChanged.connect(self.fixture_changed)
+
+        self.doc = QPlainTextEdit()
+        self.doc.setReadOnly(True)
+        self.doc.setFont(font)
+
         self.status = QLabel()
 
-        layout = QVBoxLayout(self)
-        layout.addWidget(self.text)
-        layout.addWidget(self.status)
+        layout = QGridLayout(self)
+        layout.addWidget(self.combo_fixture, 0, 1)
+        layout.addWidget(self.spinner_offset, 0, 2)
+        layout.addWidget(self.text, 0, 0, 2, 1)
+        layout.addWidget(self.doc, 1, 1, 1, 2)
+        layout.addWidget(self.status, 2, 0, 1, 3)
+        layout.setColumnStretch(0, 60)
+        layout.setColumnStretch(1, 40)
 
         self.resize(1280, 800)
 
-        self.streamer = Streamer()
+        self.streamer = Streamer(fixtures_folder)
+
+        self.combo_fixture.addItems([fixture.name for fixture in self.streamer.fixtures])
+        self.combo_fixture.currentIndexChanged.connect(self.fixture_changed)
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.tick)
         self.timer.start(1000.0 / float(FRAMERATE))
+
+        self.fixture_changed()
+
+    def fixture_changed(self):
+        self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentIndex()]
+        self.current_fixture.address = self.spinner_offset.value()
+        self.doc.setPlainText(self.current_fixture.doc())
 
     def tick(self):
         self.streamer.load(programs_source=self.text.toPlainText())
@@ -76,10 +99,10 @@ class MainWindow(QWidget):
         event.accept()
 
 
-def launch_editor(filename=None):
+def launch_editor(fixtures_folder, filename):
     app = QApplication([])
 
-    main_window = MainWindow(filename)
+    main_window = MainWindow(fixtures_folder, filename)
     main_window.show()
 
     app.exec_()

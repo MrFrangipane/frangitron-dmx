@@ -5,11 +5,11 @@ import random
 import atexit
 from threading import Thread
 import interface
+from fixtures import Fixture
 
 
 _elapsed = 0.0
 _channel = 0
-PROGRAMS = {}
 cos2 = lambda x: math.cos(x) * 0.5 + 0.5
 sin2 = lambda x: math.sin(x) * 0.5 + 0.5
 
@@ -66,8 +66,9 @@ class InterfaceThread(Thread):
 
 class Streamer(object):
 
-    def __init__(self, programs_file=None):
-        self.load(programs_file)
+    def __init__(self, fixtures_folder, programs_file=None):
+        self.load(programs_file=programs_file)
+        self._load_fixtures(fixtures_folder)
         self.universe_expressions = ["0"] * 512
         self.selected_program_id = -1
         self.selected_program_name = ""
@@ -75,6 +76,11 @@ class Streamer(object):
 
         self.interface_thread = InterfaceThread(parent=self)
         self.interface_thread.start()
+
+    def _load_fixtures(self, fixtures_folder):
+        with open("E:/PROJETS/dev/frangitron-dmx/frangitrondmx/fixtures/cameo-wookie-600b.json", "r") as f_fixture:
+            data = json.load(f_fixture)
+        self.fixtures = [Fixture.from_dict(data)]
 
     def load(self, programs_file=None, programs_source=None):
         if programs_file is not None:
@@ -93,7 +99,7 @@ class Streamer(object):
                 self.programs = dict()
 
         else:
-            self.programs = PROGRAMS
+            self.programs = dict()
 
         self.program_names = sorted(self.programs.keys())
 
