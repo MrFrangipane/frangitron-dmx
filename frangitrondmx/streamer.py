@@ -7,6 +7,8 @@ from threading import Thread
 import interface
 
 
+_elapsed = 0.0
+_channel = 0
 PROGRAMS = {}
 cos2 = lambda x: math.cos(x) * 0.5 + 0.5
 sin2 = lambda x: math.sin(x) * 0.5 + 0.5
@@ -16,8 +18,24 @@ def lerp(start, end, factor):
     return factor * end + (1.0 - factor) * start
 
 
-def quantize(value, step):
-    return (value // step) * step
+def elapsed(step=0):
+    global _elapsed
+    if step == 0: return _elapsed
+    return (_elapsed // step) * step
+
+
+def _seed(step, function_, *args, **kwargs):
+    global _channel
+    random.seed(elapsed(step) + _channel)
+    return function_(*args, **kwargs)
+
+
+def choice(iter_, step=0):
+    return _seed(step, random.choice, iter_)
+
+
+def randint(min_, max_, step=0):
+    return _seed(step, random.randint, min_, max_)
 
 
 class InterfaceThread(Thread):
@@ -31,9 +49,10 @@ class InterfaceThread(Thread):
         atexit.register(self.stop)
 
     def run(self):
+        global _elapsed
         while self.is_running:
-            elapsed = time.time() - self.start_time
-            universe = self.parent.compute_at(elapsed)
+            _elapsed = time.time() - self.start_time
+            universe = self.parent.compute()
             self.dmx.stream(universe)
 
             time.sleep(1 / float(interface.FRAMERATE))
@@ -87,7 +106,8 @@ class Streamer(object):
             self.selected_program_id = -1
             self.selected_program_name = ""
 
-    def compute_at(self, elapsed):
+    def compute(self):
+        global _channel
         self.error_state = None
 
         if self.selected_program_id != -1:
@@ -119,6 +139,7 @@ class Streamer(object):
                 else:
                     factor = 255
 
+                _channel = channel
                 universe[channel] = min(255, max(0, int(factor * eval(expression))))
             except Exception as e:
                 self.error_state = e

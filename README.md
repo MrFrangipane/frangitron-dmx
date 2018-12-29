@@ -23,17 +23,19 @@ To be :
 
 **A program is a set of channels associated to expressions.**
 
-Channels and values are based on evil `eval` where `elapsed` is time in seconds and those modules are available
+Channels and values are based on evil `eval` where `elapsed(step=0)` is time in seconds.
 
-- `math`
-- `random`
+Using values higer than zero for `step` will quantize time accordingly, allowing step changes. 
 
 Each frame, values are computed according to selected program and expressions.
 
-Proxy functions are implemented
+Functions available :
 
 - `cos2(x)` : `math.cos` expressed between 0.0 and 1.0, to avoid negative values
 - `sin2(x)` : `math.sin` expressed between 0.0 and 1.0, to avoid negative values
+- `randint(min, max, step=0)` : `random.randint` where `elapsed(step)` is used to seed the random generator
+- `choice(iterable, step=0)` : `random.choice` where `elapsed(step)` is used to seed the random generator
+- `lerp(start, end, factor)` : performs a linear interpolation from `start` to `end`, given the `factor` 
 
 Universe expressions are not reset each program change, which means that for blackout you need to assign `"0"` to all relevant channels
 

@@ -62,10 +62,10 @@ if __name__ == '__main__':
     start_time = time.time()
 
     while True:
-        elapsed = time.time() - start_time
+        _elapsed = time.time() - start_time
 
-        universe[1] = int(255 * (0.5 * math.cos(elapsed * math.pi * 0.25) + 0.5))
-        universe[2] = int(255 * (0.5 * math.cos(elapsed * math.pi * 0.25 + math.pi) + 0.5))
+        universe[1] = int(255 * (0.5 * math.cos(_elapsed * math.pi * 0.25) + 0.5))
+        universe[2] = int(255 * (0.5 * math.cos(_elapsed * math.pi * 0.25 + math.pi) + 0.5))
 
         dmx.stream(universe)
         time.sleep(1 / float(FRAMERATE))
