@@ -42,7 +42,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.text)
         layout.addWidget(self.status)
 
-        self.resize(800, 600)
+        self.resize(1280, 800)
 
         self.streamer = Streamer()
 
