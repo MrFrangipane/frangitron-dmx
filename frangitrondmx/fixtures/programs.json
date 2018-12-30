@@ -1,12 +1,31 @@
 {
   "Blackout": [
     {"fixture": "wookie600b", "address": 1, "programs": ["off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": ["off"]},
-    {"fixture": "smartspotplus", "address": 41, "programs": ["off"]}
+    {"fixture": "smartspotplus", "address": 21, "programs": ["0_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["0_off"]}
   ],
-  "Test": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": ["blue_orange_2s", "scan_2_a"]},
-    {"fixture": "smartspotplus", "address": 41, "programs": ["blue_orange_2s", "scan_2_a"]}
+  "slow_H_scan_aaaa": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
+    ]}
+  ],
+  "slow_H_scan_aabb": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_h_slow_b"
+    ]}
+  ],
+  "slow_H_scan_abab": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
+    ]}
   ]
 }
