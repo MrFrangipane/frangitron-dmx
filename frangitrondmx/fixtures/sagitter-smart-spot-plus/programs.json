@@ -67,6 +67,17 @@
     "speed": "$251"
   },
 
+  "m_random_fast": {
+    "tilt" : "$randint(0, 255, step=0.502)",
+    "pan" : "$randint(0, 255, step=0.502)",
+    "speed": "$0"
+  },
+  "m_random_slow": {
+    "tilt" : "$randint(0, 255, step=8.32)",
+    "pan" : "$randint(0, 255, step=8.32)",
+    "speed": "$255"
+  },
+
   "g_wave": {
     "gobo" : "$110"
   },

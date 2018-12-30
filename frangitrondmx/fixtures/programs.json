@@ -1,10 +1,10 @@
 {
-  "Blackout": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["off"]},
+  "0_blackout": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 41, "programs": ["0_off"]}
   ],
-  "slow_H_scan_aaaa": [
+  "slow_scan_right_sync": [
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
     ]},
@@ -12,7 +12,8 @@
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
     ]}
   ],
-  "slow_H_scan_aabb": [
+  "slow_scan_H_alt": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
     ]},
@@ -20,12 +21,125 @@
       "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_h_slow_b"
     ]}
   ],
-  "slow_H_scan_abab": [
+  "slow_scan_left_sync": [
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
     ]},
     {"fixture": "smartspotplus", "address": 41, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
+    ]}
+  ],
+
+  "slow_scan_up_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
+    ]}
+  ],
+  "slow_scan_up_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_v_slow_b"
+    ]}
+  ],
+  "slow_scan_down_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
+    ]}
+  ],
+  "slow_scan_down_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_v_slow_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
+    ]}
+  ],
+
+  "fast_scan_up_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_b"
+    ]}
+  ],
+  "fast_scan_up_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
+    ]}
+  ],"fast_scan_down_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_b"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
+    ]}
+  ],
+  "fast_scan_down_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
+    ]}
+  ],
+  "fast_scan_strobe_mid": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_mid"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_a", "s_mid"
+    ]}
+  ],
+  "fast_scan_strobe_fast": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_fast"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_a", "s_fast"
+    ]}
+  ],
+  "random_fast_strobe_fast": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"
+    ]}
+  ],
+  "random_slow_strobe_fast": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_slow", "s_fast"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_slow", "s_fast"
+    ]}
+  ],
+  "random_fast_strobe_mid": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_mid"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_mid"
+    ]}
+  ],
+  "random_slow": [
+    {"fixture": "smartspotplus", "address": 21, "programs": [
+      "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
+    ]},
+    {"fixture": "smartspotplus", "address": 41, "programs": [
+      "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
     ]}
   ]
 }
