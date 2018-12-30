@@ -128,6 +128,10 @@ class Fixture(object):
     def channels(self):
         return self._indexed_mapping
 
+    def channel_address(self, item):
+        """Returns actual address of given channel, by index or name"""
+        return self[item].number + self.address - 1
+
     def doc(self):
         doc = "{caption} [{name}]\n".format(
             caption=self.caption,
@@ -144,9 +148,10 @@ class Fixture(object):
 
     def __repr__(self):
         doc = self._doc.split("\n")[0]
-        return "<Fixture(name='{name}', doc='{doc}...', {channel_count} channels) at {id}>".format(
+        return "<Fixture(name='{name}', doc='{doc}...', address={address} {channel_count} channels) at {id}>".format(
             name=self.name,
             doc=doc,
+            address=self.address,
             channel_count=len(self._indexed_mapping) - 1,
             id=id(self)
         )

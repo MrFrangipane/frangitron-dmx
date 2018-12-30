@@ -90,7 +90,7 @@ class Streamer(object):
         self.state = State(context="Reset")
 
     def _load_fixtures(self, fixtures_folder):
-        self.fixtures = list()
+        self.fixtures = dict()
 
         folders = [
             path.join(fixtures_folder, folder) for folder
@@ -98,7 +98,8 @@ class Streamer(object):
         ]
         for folder in folders:
             try:
-                self.fixtures.append(Fixture.from_folder(folder))
+                new_fixture = Fixture.from_folder(folder)
+                self.fixtures[new_fixture.name] = new_fixture
             except KeyError as e:
                 pass
 
@@ -148,25 +149,15 @@ class Streamer(object):
         if self.selected_program_id != -1:
             program = self.programs[self.selected_program_name]
 
-            for channel_expression, value_expression in program.items():
-                try:
-                    channels = eval(channel_expression)
-                except Exception as e:
-                    self.state = State(
-                        context="Channel expression '{}'".format(channel_expression),
-                        exception=e
-                    )
-                    return bytearray([0] * 513)
+            for data in program:
+                fixture = self.fixtures[data['fixture']]
 
-                try:
-                    for channel in iter(channels):
-                        self.universe_expressions[channel] = value_expression
-                except Exception as e:
-                    try:
-                        self.universe_expressions[channels] = value_expression
-                    except Exception as e:
-                        self.state = State(context="Assigning expressions", exception=e)
-                        return bytearray([0] * 513)
+                for program_name in data['programs']:
+                    program = fixture.programs[program_name]
+
+                    for channel_name, channel_expression in  program.expressions.items():
+                        channel_address = fixture.channel_address(channel_name)
+                        self.universe_expressions[channel_address] = channel_expression
 
         universe = bytearray([0] * 513)
 

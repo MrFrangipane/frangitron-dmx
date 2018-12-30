@@ -3,8 +3,15 @@ from PySide.QtGui import QApplication, QWidget, QGridLayout, QLabel, QPlainTextE
 from PySide.QtCore import QTimer
 from streamer import Streamer
 
-
-BLACKOUT = '{ "1": {"range(1, 512)": "0"}}'
+PROGRAM = '''{
+  "1": [
+    {
+      "fixture": "__fixture__", 
+      "address": __address__, 
+      "programs": ["__program__"]
+    }
+  ]
+}'''
 FRAMERATE = 5
 
 
@@ -23,6 +30,9 @@ class MainWindow(QWidget):
         self.text.setStyleSheet("color: white; background-color: rgb(30, 30, 30)")
 
         self.combo_fixture = QComboBox()
+
+        self.combo_programs = QComboBox()
+
         self.spinner_offset = QSpinBox()
         self.spinner_offset.setMinimum(1)
         self.spinner_offset.setMaximum(512)
@@ -38,9 +48,10 @@ class MainWindow(QWidget):
         layout = QGridLayout(self)
         layout.addWidget(self.combo_fixture, 0, 1)
         layout.addWidget(self.spinner_offset, 0, 2)
-        layout.addWidget(self.text, 0, 0, 2, 1)
-        layout.addWidget(self.doc, 1, 1, 1, 2)
-        layout.addWidget(self.status, 2, 0, 1, 3)
+        layout.addWidget(self.combo_programs, 1, 1)
+        layout.addWidget(self.text, 0, 0, 3, 1)
+        layout.addWidget(self.doc, 2, 1, 1, 2)
+        layout.addWidget(self.status, 3, 0, 1, 3)
         layout.setColumnStretch(0, 60)
         layout.setColumnStretch(1, 40)
 
@@ -48,7 +59,7 @@ class MainWindow(QWidget):
 
         self.streamer = Streamer(self.fixtures_folder)
 
-        self.combo_fixture.addItems([fixture.name for fixture in self.streamer.fixtures])
+        self.combo_fixture.addItems(sorted(self.streamer.fixtures))
         self.combo_fixture.currentIndexChanged.connect(self.fixture_changed)
 
         self.timer = QTimer()
@@ -58,17 +69,36 @@ class MainWindow(QWidget):
 
         self.fixture_changed()
 
+    def update_programs(self):
+        self.combo_programs.blockSignals(True)
+        selected_program = self.combo_programs.currentText()
+
+        new_programs = sorted(self.current_fixture.programs.keys())
+        self.combo_programs.clear()
+        self.combo_programs.addItems(new_programs)
+
+        if selected_program in new_programs:
+            self.combo_programs.setCurrentIndex(self.combo_programs.findText(selected_program))
+
+        self.combo_programs.blockSignals(False)
+
     def fixture_changed(self):
-        self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentIndex()]
+        self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentText()]
         self.current_fixture.address = self.spinner_offset.value()
+        self.update_programs()
         self.doc.setPlainText(self.current_fixture.doc())
         with open(self.current_fixture.programs_filepath, 'r') as f_programs:
             self.text.setPlainText(f_programs.read())
 
     def tick(self):
         if self.should_reload:
+            self.current_fixture.reload_programs()
+            self.update_programs()
             self.streamer.reset_state()
-            self.streamer.load(programs_source=self.text.toPlainText())
+            program = PROGRAM.replace('__fixture__', self.current_fixture.name)
+            program = program.replace('__address__', str(self.current_fixture.address))
+            program = program.replace('__program__', self.combo_programs.currentText())
+            self.streamer.load(programs_source=program)
             self.streamer.program_clicked("1")
 
         else:
@@ -86,15 +116,11 @@ class MainWindow(QWidget):
             with open(self.current_fixture.programs_filepath, 'w') as f_programs:
                 f_programs.write(self.text.toPlainText())
 
-            try:
-                self.current_fixture.reload_programs()
-            except: pass
-
         self.should_reload = not self.should_reload
 
     def closeEvent(self, event):
         self.timer.stop()
-        self.streamer.load(programs_source=BLACKOUT)
+        self.streamer.load(programs_source="")
         self.streamer.program_clicked("1")
         sleep(2.0 / float(FRAMERATE))
         self.streamer.stop()
