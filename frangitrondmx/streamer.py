@@ -3,15 +3,24 @@ import time
 import math
 import random
 import atexit
+from glob import glob
 from threading import Thread
 import interface
 from fixtures import Fixture
-
 
 _elapsed = 0.0
 _channel = 0
 cos2 = lambda x: math.cos(x) * 0.5 + 0.5
 sin2 = lambda x: math.sin(x) * 0.5 + 0.5
+
+
+class State(object):
+    def __init__(self, context, exception=None):
+        self.context = context
+        self.exception = exception
+
+    def __nonzero__(self):
+        return self.exception is None
 
 
 def lerp(start, end, factor):
@@ -67,54 +76,72 @@ class InterfaceThread(Thread):
 class Streamer(object):
 
     def __init__(self, fixtures_folder, programs_file=None):
+        self.state = State(context="Initialized")
         self.load(programs_file=programs_file)
         self._load_fixtures(fixtures_folder)
         self.universe_expressions = ["0"] * 512
         self.selected_program_id = -1
         self.selected_program_name = ""
-        self.error_state = None
 
         self.interface_thread = InterfaceThread(parent=self)
         self.interface_thread.start()
 
+    def reset_state(self):
+        self.state = State(context="Reset")
+
     def _load_fixtures(self, fixtures_folder):
-        with open("E:/PROJETS/dev/frangitron-dmx/frangitrondmx/fixtures/cameo-wookie-600b.json", "r") as f_fixture:
-            data = json.load(f_fixture)
-        self.fixtures = [Fixture.from_dict(data)]
+        self.fixtures = list()
+
+        for filename in glob(fixtures_folder + "/*.json"):
+            try:
+                with open(filename, "r") as f_fixture:
+                    data = json.load(f_fixture)
+                self.fixtures.append(Fixture.from_dict(data))
+            except KeyError as e:
+                pass
 
     def load(self, programs_file=None, programs_source=None):
+        if not self.state: return
         if programs_file is not None:
             try:
                 with open(programs_file, 'r') as f_programs:
                     self.programs = json.load(f_programs)
+                self.state = State(context="Programs loaded")
             except ValueError, e:
-                self.error_state = e
+                self.state = State(context="Loading programs from file", exception=e)
                 self.programs = dict()
 
         elif programs_source is not None:
             try:
                 self.programs = json.loads(programs_source)
+                self.state = State(context="Programs loaded")
             except ValueError, e:
-                self.error_state = e
+                self.state = State(context="Loading programs from source", exception=e)
                 self.programs = dict()
 
         else:
             self.programs = dict()
+            self.state = State(context="No programs")
 
         self.program_names = sorted(self.programs.keys())
 
     def program_clicked(self, program_name):
+        if not self.state: return
+
         try:
             self.selected_program_id = self.program_names.index(program_name)
             self.selected_program_name = program_name
+            self.state = State(context="Program changed")
+
         except ValueError as e:
-            self.error_state = e
+            self.state = State(context="Changing program", exception=e)
             self.selected_program_id = -1
             self.selected_program_name = ""
 
     def compute(self):
         global _channel
-        self.error_state = None
+        if not self.state:
+            return bytearray([0] * 513)
 
         if self.selected_program_id != -1:
             program = self.programs[self.selected_program_name]
@@ -123,8 +150,11 @@ class Streamer(object):
                 try:
                     channels = eval(channel_expression)
                 except Exception as e:
-                    self.error_state = e
-                    continue
+                    self.state = State(
+                        context="Channel expression '{}'".format(channel_expression),
+                        exception=e
+                    )
+                    return bytearray([0] * 513)
 
                 try:
                     for channel in iter(channels):
@@ -133,7 +163,8 @@ class Streamer(object):
                     try:
                         self.universe_expressions[channels] = value_expression
                     except Exception as e:
-                        self.error_state = e
+                        self.state = State(context="Assigning expressions", exception=e)
+                        return bytearray([0] * 513)
 
         universe = bytearray([0] * 513)
 
@@ -148,12 +179,14 @@ class Streamer(object):
                 _channel = channel
                 universe[channel] = min(255, max(0, int(factor * eval(expression))))
             except Exception as e:
-                self.error_state = e
+                self.state = State(
+                    context="Computing value '{}'".format(expression),
+                    exception=e
+                )
+                return bytearray([0] * 513)
 
-        if self.error_state is None:
-            return universe
-        else:
-            return bytearray([0] * 513)
+        self.state = State(context="Computed")
+        return universe
 
     def ui_status(self):
         return {

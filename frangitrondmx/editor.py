@@ -12,7 +12,7 @@ TEMPLATE = """{
   }
 }"""
 BLACKOUT = '{ "1": {"range(1, 512)": "0"}}'
-FRAMERATE = 30
+FRAMERATE = 5
 
 
 class MainWindow(QWidget):
@@ -64,7 +64,8 @@ class MainWindow(QWidget):
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.tick)
-        self.timer.start(1000.0 / float(FRAMERATE))
+        self.timer.start(500.0 / FRAMERATE)
+        self.should_reload = True
 
         self.fixture_changed()
 
@@ -74,21 +75,27 @@ class MainWindow(QWidget):
         self.doc.setPlainText(self.current_fixture.doc())
 
     def tick(self):
-        self.streamer.load(programs_source=self.text.toPlainText())
+        if self.should_reload:
+            self.streamer.reset_state()
+            self.streamer.load(programs_source=self.text.toPlainText())
+            self.streamer.program_clicked("1")
 
-        if self.streamer.error_state is None:
-            self.status.setStyleSheet("background-color: green; color: white; padding: 5px")
-            self.status.setText("Streaming...")
         else:
-            self.status.setStyleSheet("background-color: red; color: white; padding: 5px")
-            self.status.setText(str(self.streamer.error_state))
+            state = self.streamer.state
 
-        self.streamer.program_clicked("1")
+            if state:
+                self.status.setStyleSheet("background-color: green; color: white; padding: 5px")
+                self.status.setText(state.context)
+            else:
+                self.status.setStyleSheet("background-color: red; color: white; padding: 5px")
+                self.status.setText("{} : {}".format(state.context, state.exception))
 
-        if self.filename is None: return
+            if self.filename is None: return
 
-        with open(self.filename, 'w') as f_programs:
-            f_programs.write(self.text.toPlainText())
+            with open(self.filename, 'w') as f_programs:
+                f_programs.write(self.text.toPlainText())
+
+        self.should_reload = not self.should_reload
 
     def closeEvent(self, event):
         self.timer.stop()

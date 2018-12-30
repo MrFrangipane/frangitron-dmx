@@ -58,7 +58,7 @@ class Interface(object):
 if __name__ == '__main__':
     # Basic example
     dmx = Interface()
-    universe = bytearray([0] * 512)
+    universe = bytearray([0] * 513)
     start_time = time.time()
 
     while True:

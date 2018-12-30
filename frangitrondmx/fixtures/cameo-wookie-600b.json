@@ -1,0 +1,81 @@
+{
+  "name": "wookie600b",
+  "caption": "Cameo WOOKIE 600b",
+  "doc": "Blue Laser - 9 CH DMX mode",
+  "mapping": {
+    "1": {
+      "name": "mode",
+      "role": "Mode Select",
+      "doc": [
+        "000 - 063 : Laser off",
+        "064 - 127 : Auto mode",
+        "128 - 191 : Sound mode",
+        "192 - 255 : DMX mode (CH2 - CH8)"
+      ]
+    },
+    "3": {
+      "name": "pattern",
+      "role": "Pattern select",
+      "doc": [
+        "112 : --v---v--",
+        "120 : v^v^v^v^v",
+        "152 : ---------",
+        "160 : --  -- --",
+        "176 : =========",
+        "184 :     +    ",
+        "192 :    _-    ",
+        "232 : - - - - -",
+        "240 : half dot circle",
+        "248 : dot filled square"
+      ]
+    },
+    "4": {
+      "name": "zoom",
+      "role": "Zoom",
+      "doc": [
+        "000 - 127 : Manual from small to large",
+        "128 - 255 : In / out from slow to fast"
+      ]
+    },
+    "5": {
+      "name": "rot_x",
+      "role": "X rotation",
+      "doc": [
+        "000 - 127 : Manual",
+        "128 - 255 : Auto from slow to fast"
+      ]
+    },
+    "6": {
+      "name": "rot_y",
+      "role": "Y rotation",
+      "doc": [
+        "000 - 127 : Manual",
+        "128 - 255 : Auto from slow to fast"
+      ]
+    },
+    "7": {
+      "name": "rot_z",
+      "role": "Z rotation (projection plane)",
+      "doc": [
+        "000 - 127 : Manual",
+        "128 - 255 : Auto from slow to fast"
+      ]
+    },
+    "8": {
+      "name": "pos_x",
+      "role": "X position (left / right)",
+      "doc": [
+        "000 - 127 : Manual",
+        "128 - 255 : Auto from slow to fast"
+      ]
+    },
+    "9": {
+      "name": "pos_y",
+      "role": "Y position (up / down)",
+      "doc": [
+        "000 - 127 : Manual",
+        "128 - 255 : Auto from slow to fast"
+      ]
+    }
+  }
+}

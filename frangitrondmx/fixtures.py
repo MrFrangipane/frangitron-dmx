@@ -29,19 +29,20 @@ class Channel(object):
         return new_channel
 
     def doc(self, offset=0):
-        doc = "Channel {number:03d} (.{name}) : {role}\n".format(
+        doc = "CH {number:03d} [{name}] : {role}\n".format(
             number=self.number + offset,
             name=self.name,
             role=self.role
         )
-        doc += self._doc
+        doc += _indent(self._doc)
         return doc
 
     def __repr__(self):
-        return "<(Channel name='{name}', number={number}, role='{role}')>".format(
+        return "<Channel(name='{name}', number={number}, role='{role}') at {id}>".format(
             name=self.name,
             number=self.number,
-            role=self.role
+            role=self.role,
+            id=id(self)
         )
 
 
@@ -49,6 +50,7 @@ class Fixture(object):
 
     def __init__(self, name):
         self.name = name
+        self.caption = ""
         self.address = 1
         self._doc = ""
         self._indexed_mapping = list()
@@ -57,6 +59,7 @@ class Fixture(object):
     @staticmethod
     def from_dict(data):
         new_fixture = Fixture(data['name'])
+        new_fixture.caption = data['caption']
         new_fixture._doc = _doc(data['doc'])
 
         mapping = data['mapping']
@@ -89,7 +92,10 @@ class Fixture(object):
         return self._indexed_mapping
 
     def doc(self):
-        doc = self.name + '\n'
+        doc = "{caption} [{name}]\n".format(
+            caption=self.caption,
+            name=self.name
+        )
         doc += self._doc + '\n'
 
         channel_docs = [channel.doc(offset=self.address - 1) for channel in self.channels() if channel is not None]
@@ -101,10 +107,11 @@ class Fixture(object):
 
     def __repr__(self):
         doc = self._doc.split("\n")[0]
-        return "<Fixture(name='{name}', doc='{doc}...', {channel_count} channels)>".format(
+        return "<Fixture(name='{name}', doc='{doc}...', {channel_count} channels) at {id}>".format(
             name=self.name,
             doc=doc,
-            channel_count=len(self._indexed_mapping) - 1
+            channel_count=len(self._indexed_mapping) - 1,
+            id=id(self)
         )
 
 if __name__ == '__main__':
@@ -114,4 +121,7 @@ if __name__ == '__main__':
 
     fixture = Fixture.from_dict(data)
     fixture.address = 20
+    print fixture
+    print fixture.channels()[1]
+    print ""
     print fixture.doc()

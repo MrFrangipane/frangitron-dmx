@@ -1,0 +1,104 @@
+{
+  "name": "smartspotplus",
+  "caption": "Sagitter Smartspot Plus",
+  "doc": "Moving Head LED  - 11 CH DMX mode",
+  "mapping": {
+    "1": {
+      "name": "pan",
+      "role": "Pan",
+      "doc": "000 - 255 : Pan"
+    },
+    "2": {
+      "name": "tilt",
+      "role": "Tilt",
+      "doc": "000 - 255 : Tilt"
+    },
+    "3": {
+      "name": "pan_fine",
+      "role": "Pan fine",
+      "doc": "000 - 255 : Pan fine"
+    },
+    "4": {
+      "name": "tilt_fine",
+      "role": "Tilt fine",
+      "doc": "000 - 255 : Tilt fine"
+    },
+    "5": {
+      "name": "speed",
+      "role": "Pan / tile speed",
+      "doc": "000 - 255 : From fast to slow"
+    },
+    "6": {
+      "name": "color",
+      "role": "Color filter",
+      "doc": [
+        "000 - 010 : Open",
+        "011 - 021 : Red",
+        "022 - 032 : Green",
+        "033 - 043 : Blue",
+        "044 - 054 : Yellow",
+        "055 - 065 : Orange",
+        "066 - 076 : Magenta",
+        "077 - 087 : Cyan",
+        "088 - 175 : Wheel position",
+        "176 - 255 : Rainbow from slow to fast"
+      ]
+    },
+    "7": {
+      "name": "gobo",
+      "role": "Gobo",
+      "doc": [
+        "000 - 015 : Open",
+        "016 - 031 : Gobo 1",
+        "042 - 046 : Gobo 2",
+        "047 - 062 : Gobo 3",
+        "063 - 078 : Gobo 4",
+        "079 - 093 : Gobo 5",
+        "094 - 109 : Gobo 6",
+        "110 - 124 : Gobo 7",
+        "125 - 140 : Shaking 7 from slow to fast",
+        "141 - 156 : Shaking 6 from slow to fast",
+        "157 - 171 : Shaking 5 from slow to fast",
+        "172 - 187 : Shaking 4 from slow to fast",
+        "188 - 203 : Shaking 3 from slow to fast",
+        "204 - 218 : Shaking 2 from slow to fast",
+        "219 - 234 : Shaking 1 from slow to fast",
+        "235 - 249 : Shaking open from slow to fast",
+        "250 - 255 : Rainbow from slow to fast"
+      ]
+    },
+    "8": {
+      "name": "dimmer",
+      "role": "Dimmer",
+      "doc": "000 - 255 : From dark to bright"
+    },
+    "9": {
+      "name": "strobe",
+      "role": "Strobe",
+      "doc": [
+        "000 - 009 : Open",
+        "010 - 255 : Strobe from slow to fast"
+      ]
+    },
+    "10": {
+      "name": "special",
+      "role": "Special functions",
+      "doc": [
+        "000 - 139 : No function",
+        "140 - 209 : Macro random automatic mode (with CH11)",
+        "210 - 233 : No function",
+        "234 - 236 : Reset",
+        "237 - 249 : No function",
+        "250 - 255 : Sound (with CH11)"
+      ]
+    },
+    "11": {
+      "name": "sensitivity",
+      "role": "Macro speed / Sound sensitivity",
+      "doc": [
+        "000 - 255 : Macro speed from fast to slow",
+        "000 - 255 : Sound sensitivity from min to max"
+      ]
+    }
+  }
+}
