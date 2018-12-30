@@ -1,3 +1,4 @@
+from os import path
 from time import sleep
 from PySide.QtGui import QApplication, QWidget, QGridLayout, QLabel, QPlainTextEdit, QFont, QComboBox, QSpinBox
 from PySide.QtCore import QTimer
@@ -5,24 +6,17 @@ from streamer import Streamer
 
 
 TEMPLATE = """{
-  "1": {
-    "1": "1.0",
-    "2": "1.0",
-    "3": "1.0"
-  }
+  "1": {}
 }"""
 BLACKOUT = '{ "1": {"range(1, 512)": "0"}}'
 FRAMERATE = 5
 
 
 class MainWindow(QWidget):
-    def __init__(self, fixtures_folder, filename, parent=None):
+    def __init__(self, fixtures_folder, parent=None):
         QWidget.__init__(self, parent)
-
-        self.filename = filename
-        with open(self.filename, 'r') as f_program:
-            text = f_program.read()
-
+        self.current_fixture = None
+        self.fixtures_folder = fixtures_folder
         self.setWindowTitle("Frangitron DMX program editor")
 
         self.text = QPlainTextEdit()
@@ -31,7 +25,6 @@ class MainWindow(QWidget):
         font.setPixelSize(16)
         self.text.setFont(font)
         self.text.setStyleSheet("color: white; background-color: rgb(30, 30, 30)")
-        self.text.setPlainText(text)
 
         self.combo_fixture = QComboBox()
         self.spinner_offset = QSpinBox()
@@ -57,7 +50,7 @@ class MainWindow(QWidget):
 
         self.resize(1280, 800)
 
-        self.streamer = Streamer(fixtures_folder)
+        self.streamer = Streamer(self.fixtures_folder)
 
         self.combo_fixture.addItems([fixture.name for fixture in self.streamer.fixtures])
         self.combo_fixture.currentIndexChanged.connect(self.fixture_changed)
@@ -69,10 +62,26 @@ class MainWindow(QWidget):
 
         self.fixture_changed()
 
+    def programs_filepath(self):
+        if self.current_fixture is None : return
+        return self.fixtures_folder + '/' + self.current_fixture.name + '-programs.json'
+
     def fixture_changed(self):
         self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentIndex()]
         self.current_fixture.address = self.spinner_offset.value()
         self.doc.setPlainText(self.current_fixture.doc())
+        self.load_programs_file()
+
+    def load_programs_file(self):
+        filepath = self.programs_filepath()
+        if filepath is None: return
+
+        if not path.isfile(filepath):
+            with open(filepath, 'w') as f_programs:
+                f_programs.write(TEMPLATE)
+
+        with open(self.programs_filepath(), 'r') as f_programs:
+            self.text.setPlainText(f_programs.read())
 
     def tick(self):
         if self.should_reload:
@@ -90,9 +99,9 @@ class MainWindow(QWidget):
                 self.status.setStyleSheet("background-color: red; color: white; padding: 5px")
                 self.status.setText("{} : {}".format(state.context, state.exception))
 
-            if self.filename is None: return
+            if self.current_fixture is None: return
 
-            with open(self.filename, 'w') as f_programs:
+            with open(self.programs_filepath(), 'w') as f_programs:
                 f_programs.write(self.text.toPlainText())
 
         self.should_reload = not self.should_reload
@@ -106,10 +115,10 @@ class MainWindow(QWidget):
         event.accept()
 
 
-def launch_editor(fixtures_folder, filename):
+def launch_editor(fixtures_folder):
     app = QApplication([])
 
-    main_window = MainWindow(fixtures_folder, filename)
+    main_window = MainWindow(fixtures_folder)
     main_window.show()
 
     app.exec_()

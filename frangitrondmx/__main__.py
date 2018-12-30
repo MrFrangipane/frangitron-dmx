@@ -12,7 +12,6 @@ if __name__ == '__main__':
             programs_file = sys.argv[2]
             serve_webapp(Streamer(fixtures_folder, programs_file))
 
-    elif len(sys.argv) == 4 and sys.argv[1] == "editor" and os.path.isdir(sys.argv[2]) and os.path.isfile(sys.argv[3]):
-        fixtures_folder = sys.argv[2]
-        programs_file = sys.argv[3]
-        launch_editor(fixtures_folder, programs_file)
+        if sys.argv[1] == "editor" and os.path.isdir(sys.argv[2]):
+            fixtures_folder = sys.argv[2]
+            launch_editor(fixtures_folder)
