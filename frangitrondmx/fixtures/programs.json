@@ -1,0 +1,12 @@
+{
+  "Blackout": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["off"]},
+    {"fixture": "smartspotplus", "address": 21, "programs": ["off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["off"]}
+  ],
+  "Test": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]},
+    {"fixture": "smartspotplus", "address": 21, "programs": ["blue_orange_2s", "scan_2_a"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["blue_orange_2s", "scan_2_a"]}
+  ]
+}

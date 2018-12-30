@@ -1,7 +1,7 @@
 {
-  "off": {
-    "pan" : "$0",
-    "tilt" : "$0",
+  "0_off": {
+    "pan" : "$85",
+    "tilt" : "$230",
     "pan_fine" : "$0",
     "tilt_fine" : "$0",
     "speed" : "$0",
@@ -11,67 +11,156 @@
     "special" : "$0",
     "sensitivity" : "$0"
   },
-  "build_1_a": {
-    "pan" : "$60 if elapsed() % 4 < 0.7 else 110",
-    "tilt" : "$220",
-    "pan_fine" : "$0",
-    "tilt_fine" : "$0",
-    "speed" : "$0 if elapsed() % 4 < 0.7 else 235",
-    "gobo" : "$16",
-    "dimmer" : "$0 if elapsed() % 4 < 0.7 else 100",
-    "strobe" : "$240",
-    "special" : "$0",
-    "sensitivity" : "$0"
+
+  "m_up": {
+    "pan" : "$85",
+    "tilt" : "$131"
   },
-  "build_2_a": {
-    "pan" : "$60 if elapsed() % 2 < 1 else 110",
-    "tilt" : "$220",
-    "pan_fine" : "$0",
-    "tilt_fine" : "$0",
-    "speed" : "$60",
-    "gobo" : "$16",
-    "dimmer" : "$100",
-    "strobe" : "$240",
-    "special" : "$0",
-    "sensitivity" : "$0"
+
+  "m_scan_h_fast_a": {
+    "pan" : "$(50, 120)[elapsed() % 2.08 < 1.04]",
+    "speed": "$0"
   },
-  "scan_1_a": {
-    "pan" : "$40 if elapsed() % 4 > 2 else 130",
-    "tilt" : "$255 if elapsed() % 2 < 1 else 200",
-    "pan_fine" : "$0",
-    "tilt_fine" : "$0",
-    "speed" : "$200",
-    "gobo" : "$16",
-    "dimmer" : "$100",
-    "strobe" : "$0",
-    "special" : "$0",
-    "sensitivity" : "$0"
+  "m_scan_h_fast_b": {
+    "pan" : "$(120, 50)[elapsed() % 2.08 < 1.04]",
+    "speed": "$0"
   },
-  "scan_2_a": {
-    "pan" : "$40 if elapsed() % 6 > 3 else 130",
-    "tilt" : "$255",
-    "pan_fine" : "$0",
-    "tilt_fine" : "$0",
-    "speed" : "$200",
-    "gobo" : "$16",
-    "dimmer" : "$100",
-    "strobe" : "$0",
-    "special" : "$0",
-    "sensitivity" : "$0"
+  "m_scan_h_mid_a": {
+    "pan" : "$(65, 105)[elapsed() % 2.08 < 1.04]",
+    "speed": "$160"
   },
-  "white": {
-    "color": "$0"
+  "m_scan_h_mid_b": {
+    "pan" : "$(105, 65)[elapsed() % 2.08 < 1.04]",
+    "speed": "$160"
   },
-  "red": {
-    "color": "$11"
+  "m_scan_h_slow_a": {
+    "pan" : "$(51, 119)[elapsed() % 8.32 < 4.16]",
+    "speed": "$230"
   },
-  "blue": {
-    "color": "$33"
+  "m_scan_h_slow_b": {
+    "pan" : "$(119, 51)[elapsed() % 8.32 < 4.16]",
+    "speed": "$230"
   },
-  "orange": {
-    "color": "$55"
+
+  "m_scan_v_fast_a": {
+    "tilt" : "$(170, 255)[elapsed() % 2.08 < 1.04]",
+    "speed": "$0"
   },
-  "blue_orange_2s": {
-    "color": "$33 if elapsed() % 4 < 2 else 55"
+  "m_scan_v_fast_b": {
+    "tilt" : "$(255, 170)[elapsed() % 2.08 < 1.04]",
+    "speed": "$0"
+  },
+  "m_scan_v_mid_a": {
+    "tilt" : "$(255, 170)[elapsed() % 2.08 < 1.04]",
+    "speed": "$235"
+  },
+  "m_scan_v_mid_b": {
+    "tilt" : "$(170, 255)[elapsed() % 2.08 < 1.04]",
+    "speed": "$235"
+  },
+  "m_scan_v_slow_a": {
+    "tilt" : "$(255, 170)[elapsed() % 8.32 < 4.16]",
+    "speed": "$251"
+  },
+  "m_scan_v_slow_b": {
+    "tilt" : "$(170, 255)[elapsed() % 8.32 < 4.16]",
+    "speed": "$251"
+  },
+
+  "g_wave": {
+    "gobo" : "$110"
+  },
+  "g_wave_shake": {
+    "gobo" : "$125"
+  },
+  "g_circle": {
+    "gobo" : "$16"
+  },
+  "g_circle_shake": {
+    "gobo" : "$219"
+  },
+  "g_open": {
+    "gobo" : "$0"
+  },
+  "g_open_shake": {
+    "gobo" : "$235"
+  },
+
+  "d_low": {
+    "dimmer" : "$85"
+  },
+  "d_low_fast_a": {
+    "dimmer" : "$(0, 85)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_low_fast_b": {
+    "dimmer" : "$(85, 0)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_low_slow_a": {
+    "dimmer" : "$(0, 85)[elapsed() % 8.32 < 4.16]"
+  },
+  "d_low_slow_b": {
+    "dimmer" : "$(85, 0)[elapsed() % 8.32 < 4.16]"
+  },
+
+
+  "d_mid": {
+    "dimmer" : "$170"
+  },
+  "d_mid_fast_a": {
+    "dimmer" : "$(0, 170)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_mid_fast_b": {
+    "dimmer" : "$(170, 0)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_mid_slow_a": {
+    "dimmer" : "$(0, 85)[elapsed() % 8.32 < 4.16]"
+  },
+  "d_mid_slow_b": {
+    "dimmer" : "$(85, 0)[elapsed() % 8.32 < 4.16]"
+  },
+
+  "d_high": {
+    "dimmer" : "$255"
+  },
+  "d_high_fast_a": {
+    "dimmer" : "$(0, 255)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_high_fast_b": {
+    "dimmer" : "$(255, 0)[elapsed() % 2.08 < 1.04]"
+  },
+  "d_high_slow_a": {
+    "dimmer" : "$(0, 85)[elapsed() % 8.32 < 4.16]"
+  },
+  "d_high_slow_b": {
+    "dimmer" : "$(85, 0)[elapsed() % 8.32 < 4.16]"
+  },
+
+  "c_white": {
+    "color": "$90"
+  },
+  "c_red": {
+    "color": "$101"
+  },
+  "c_blue": {
+    "color": "$123"
+  },
+  "c_orange": {
+    "color": "$145"
+  },
+  "c_blue_orange_2s_a": {
+    "color": "$(145, 123)[elapsed() % 2.08 < 1.04]"
+  },
+  "c_blue_orange_2s_b": {
+    "color": "$(123, 145)[elapsed() % 2.08 < 1.04]"
+  },
+
+  "s_slow": {
+    "strobe": "$150"
+  },
+  "s_mid": {
+    "strobe": "$225"
+  },
+  "s_fast": {
+    "strobe": "$247"
   }
 }

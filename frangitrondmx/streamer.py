@@ -158,7 +158,12 @@ class Streamer(object):
                     if program is None: continue
 
                     for channel_name, channel_expression in  program.expressions.items():
-                        channel_address = fixture.channel_address(channel_name)
+                        try:
+                            channel_address = fixture.channel_address(channel_name)
+                        except Exception as e:
+                            self.state = State(context="Channel addressing", exception=e)
+                            return bytearray([0] * 513)
+
                         self.universe_expressions[channel_address] = channel_expression
 
         universe = bytearray([0] * 513)
