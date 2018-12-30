@@ -1,3 +1,11 @@
+import json
+from os import path
+
+
+PROGRAM_TEMPLATE = """{
+  "off": {
+  }
+}"""
 
 
 def _indent(text, spaces=2):
@@ -52,6 +60,8 @@ class Fixture(object):
         self.name = name
         self.caption = ""
         self.address = 1
+        self.programs = dict()
+        self.programs_filepath = None
         self._doc = ""
         self._indexed_mapping = list()
         self._named_mapping = dict()
@@ -76,6 +86,33 @@ class Fixture(object):
             new_fixture._named_mapping[new_channel.name] = new_channel
 
         return new_fixture
+
+    @staticmethod
+    def from_folder(folder):
+        filepath_definition = path.join(folder, 'definition.json')
+        filepath_programs = path.join(folder, 'programs.json')
+
+        with open(filepath_definition, 'r') as f_definition:
+            definition = json.load(f_definition)
+
+        new_fixture = Fixture.from_dict(definition)
+        new_fixture.programs_filepath = filepath_programs
+        new_fixture.reload_programs()
+
+        return new_fixture
+
+    def reload_programs(self):
+        self.programs = dict()
+
+        with open(self.programs_filepath, 'r') as f_programs:
+            try:
+                programs = json.load(f_programs)
+            except ValueError:
+                return
+
+        for program_name, program_channels in programs.items():
+            new_program = FixtureProgram.from_dict(program_name, program_channels)
+            self.programs[program_name] = new_program
 
     def __getitem__(self, item):
         """Allows access to channels by number or by name"""
@@ -114,14 +151,33 @@ class Fixture(object):
             id=id(self)
         )
 
-if __name__ == '__main__':
-    import json
-    with open("E:/PROJETS/dev/frangitron-dmx/frangitrondmx/fixtures/cameo-wookie-600b.json", "r") as f_fixture:
-        data = json.load(f_fixture)
 
-    fixture = Fixture.from_dict(data)
+class FixtureProgram(object):
+    def __init__(self, name):
+        self.name = name
+        self.caption = name.replace("_", " ")
+        self.expressions = dict()
+
+    @staticmethod
+    def from_dict(name, channel_data):
+        new_fixture_program = FixtureProgram(name)
+        new_fixture_program.expressions = dict(channel_data)
+        return new_fixture_program
+
+    def __repr__(self):
+        return "<FixtureProgram(name='{name}') at {id}>".format(
+            name=self.name,
+            id=id(self)
+        )
+
+
+if __name__ == '__main__':
+    folder = "E:/PROJETS/dev/frangitron-dmx/frangitrondmx/fixtures/cameo-wookie-600b"
+    fixture = Fixture.from_folder(folder)
     fixture.address = 20
+
     print fixture
     print fixture.channels()[1]
+    print fixture.programs.values()[0]
     print ""
     print fixture.doc()

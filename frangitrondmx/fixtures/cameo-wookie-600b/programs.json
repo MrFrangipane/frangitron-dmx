@@ -1,0 +1,132 @@
+{
+  "1": {
+    "mode": "$0",
+    "pattern": "$0",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$0"
+  },
+  "off": {
+    "mode": "$0",
+    "pattern": "$0",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$0"
+  },
+  "random_full": {
+    "mode": "$200",
+    "pattern": "$choice((120, 152, 160, 176, 184, 192, 323, 240, 248), step=.25)",
+    "zoom": "$01",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$randint(0, 127, step=0.12)",
+    "pos_x": "$0",
+    "pos_y": "$0"
+  },
+  "random_rays": {
+    "mode": "$200",
+    "pattern": "$248",
+    "zoom": "$01",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$randint(0, 127)",
+    "pos_x": "$randint(0, 127)",
+    "pos_y": "$randint(0, 127)"
+  },
+  "scan_H": {
+    "mode": "$200",
+    "pattern": "$152",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$32",
+    "pos_x": "$128",
+    "pos_y": "$0"
+  },
+  "scan_H_changing": {
+    "mode": "$200",
+    "pattern": "$(152, 160, 232)[int(elapsed() * 3) % 3]",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$32",
+    "pos_x": "$128",
+    "pos_y": "$0"
+  },
+  "scan_H_fast": {
+    "mode": "$200",
+    "pattern": "$112",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$32",
+    "pos_x": "$128",
+    "pos_y": "$250"
+  },
+  "scan_H_round_rays": {
+    "mode": "$200",
+    "pattern": "$240",
+    "zoom": "$01",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$32",
+    "pos_x": "$128",
+    "pos_y": "$0"
+  },
+  "scan_V": {
+    "mode": "$200",
+    "pattern": "$152",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$128"
+  },
+  "scan_V_changing": {
+    "mode": "$200",
+    "pattern": "$(152, 160, 232)[int(elapsed() * 3) % 3]",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$128"
+  },
+  "scan_V_fast": {
+    "mode": "$200",
+    "pattern": "$112",
+    "zoom": "$0",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$250",
+    "pos_y": "$128"
+  },
+  "scan_V_round_rays": {
+    "mode": "$200",
+    "pattern": "$240",
+    "zoom": "$01",
+    "rot_x": "$0",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$128"
+  },
+  "wave_slow": {
+    "mode": "$200",
+    "pattern": "$120",
+    "zoom": "$50",
+    "rot_x": "$128",
+    "rot_y": "$0",
+    "rot_z": "$0",
+    "pos_x": "$0",
+    "pos_y": "$0"
+  }
+}

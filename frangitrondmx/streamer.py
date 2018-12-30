@@ -3,7 +3,7 @@ import time
 import math
 import random
 import atexit
-from glob import glob
+from os import path, listdir
 from threading import Thread
 import interface
 from fixtures import Fixture
@@ -92,11 +92,13 @@ class Streamer(object):
     def _load_fixtures(self, fixtures_folder):
         self.fixtures = list()
 
-        for filename in glob(fixtures_folder + "/*.json"):
+        folders = [
+            path.join(fixtures_folder, folder) for folder
+            in listdir(fixtures_folder) if path.isdir(path.join(fixtures_folder, folder))
+        ]
+        for folder in folders:
             try:
-                with open(filename, "r") as f_fixture:
-                    data = json.load(f_fixture)
-                self.fixtures.append(Fixture.from_dict(data))
+                self.fixtures.append(Fixture.from_folder(folder))
             except KeyError as e:
                 pass
 

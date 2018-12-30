@@ -1,13 +1,9 @@
-from os import path
 from time import sleep
 from PySide.QtGui import QApplication, QWidget, QGridLayout, QLabel, QPlainTextEdit, QFont, QComboBox, QSpinBox
 from PySide.QtCore import QTimer
 from streamer import Streamer
 
 
-TEMPLATE = """{
-  "1": {}
-}"""
 BLACKOUT = '{ "1": {"range(1, 512)": "0"}}'
 FRAMERATE = 5
 
@@ -62,25 +58,11 @@ class MainWindow(QWidget):
 
         self.fixture_changed()
 
-    def programs_filepath(self):
-        if self.current_fixture is None : return
-        return self.fixtures_folder + '/' + self.current_fixture.name + '-programs.json'
-
     def fixture_changed(self):
         self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentIndex()]
         self.current_fixture.address = self.spinner_offset.value()
         self.doc.setPlainText(self.current_fixture.doc())
-        self.load_programs_file()
-
-    def load_programs_file(self):
-        filepath = self.programs_filepath()
-        if filepath is None: return
-
-        if not path.isfile(filepath):
-            with open(filepath, 'w') as f_programs:
-                f_programs.write(TEMPLATE)
-
-        with open(self.programs_filepath(), 'r') as f_programs:
+        with open(self.current_fixture.programs_filepath, 'r') as f_programs:
             self.text.setPlainText(f_programs.read())
 
     def tick(self):
@@ -101,8 +83,12 @@ class MainWindow(QWidget):
 
             if self.current_fixture is None: return
 
-            with open(self.programs_filepath(), 'w') as f_programs:
+            with open(self.current_fixture.programs_filepath, 'w') as f_programs:
                 f_programs.write(self.text.toPlainText())
+
+            try:
+                self.current_fixture.reload_programs()
+            except: pass
 
         self.should_reload = not self.should_reload
 
