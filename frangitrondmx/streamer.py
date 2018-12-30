@@ -151,9 +151,11 @@ class Streamer(object):
 
             for data in program:
                 fixture = self.fixtures[data['fixture']]
+                fixture.address = data['address']
 
                 for program_name in data['programs']:
-                    program = fixture.programs[program_name]
+                    program = fixture.programs.get(program_name, None)
+                    if program is None: continue
 
                     for channel_name, channel_expression in  program.expressions.items():
                         channel_address = fixture.channel_address(channel_name)

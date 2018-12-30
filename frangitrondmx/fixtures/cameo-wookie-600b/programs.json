@@ -102,7 +102,7 @@
   "scan_V_round_rays": {
     "mode": "$200",
     "pattern": "$240",
-    "zoom": "$01",
+    "zoom": "$0",
     "rot_x": "$0",
     "rot_y": "$0",
     "rot_z": "$0",
