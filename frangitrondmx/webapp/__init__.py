@@ -155,6 +155,5 @@ def serve_webapp(streamer):
     _socketio.run(
         _app,
         debug=True,
-        use_reloader = False,
         host='0.0.0.0'
     )
