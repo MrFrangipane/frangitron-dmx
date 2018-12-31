@@ -2,7 +2,7 @@
   color: white;
   background-color: black;
   font-family: sans-serif;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 :focus {
@@ -13,6 +13,7 @@ table {
   border: none;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
 }
 
 td {
@@ -29,12 +30,14 @@ input[type=submit], button {
   margin: 4px 2px;
   cursor: pointer;
   font-size: large;
+  text-align: left;
 }
 
 input[type=submit].active {
   color: black;
   background-color: white;
   border-radius: 5px;
+  text-align: left;
 }
 
 input[type=submit].footer , .footer {

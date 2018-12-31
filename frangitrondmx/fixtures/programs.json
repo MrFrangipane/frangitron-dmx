@@ -17,6 +17,143 @@
     {"fixture": "ministage", "address": 61, "programs": ["0_off"]},
     {"fixture": "ministage", "address": 71, "programs": ["0_off"]}
   ],
+  "04_full_random": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["random_full"]},
+    {"fixture": "smartspotplus", "address": 21, "programs": ["0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"]},
+    {"fixture": "ministage", "address": 61, "programs": ["strobe_random"]},
+    {"fixture": "ministage", "address": 71, "programs": ["strobe_random"]}
+  ],
+  "05_full_white": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
+    {"fixture": "smartspotplus", "address": 21, "programs": ["0_off", "c_white", "d_high", "g_open", "m_up"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["0_off", "c_white", "d_high", "g_open", "m_up"]},
+    {"fixture": "ministage", "address": 61, "programs": ["white"]},
+    {"fixture": "ministage", "address": 71, "programs": ["white"]}
+  ],
+
+  "101_wave_slow": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["wave_slow"]}],
+  "102_fixed_H": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["fixed_H"]}],
+  "103_random_rays": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["random_rays"]}],
+  "104_random_full": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["random_full"]}],
+  "105_scan_H": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_H"]}],
+  "106_scan_H_changing": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_H_changing"]}],
+  "107_scan_H_fast": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_H_fast"]}],
+  "108_scan_H_round_rays": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_H_round_rays"]}],
+  "109_scan_V": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]}],
+  "110_scan_V_changing": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V_changing"]}],
+  "111_scan_V_fast": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V_fast"]}],
+  "112_scan_V_round_rays": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V_round_rays"]}],
+
+  "201_slow_scan_left": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_a", "g_circle", "m_scan_h_slow_b", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_b", "g_circle", "m_scan_h_slow_a", "s_off"]}
+  ],
+  "202_slow_scan_right": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_a", "g_circle", "m_scan_h_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_b", "g_circle", "m_scan_h_slow_b", "s_off"]}
+  ],
+  "203_slow_scan_H": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_scan_h_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_scan_h_slow_b", "s_off"]}
+  ],
+  "204_slow_scan_H_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_scan_h_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_scan_h_slow_a", "s_off"]}
+  ],
+
+  "205_slow_scan_up_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_b", "g_circle", "m_scan_v_slow_b", "s_off"]}
+  ],
+  "206_slow_scan_up_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_a", "s_off"]}
+  ],
+  "207_slow_scan_down_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_b", "g_circle", "m_scan_v_slow_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_b", "s_off"]}
+  ],
+  "208_slow_scan_down_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_b", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_slow_a", "g_circle", "m_scan_v_slow_b", "s_off"]}
+  ],
+
+
+  "209_fast_scan_up_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_fast_b", "g_circle", "m_scan_v_fast_a]", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_fast_a", "g_circle", "m_scan_v_fast_b", "s_off"]}
+  ],
+  "210_fast_scan_up_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_fast_b", "g_circle", "m_scan_v_fast_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_fast_b", "g_circle", "m_scan_v_fast_a", "s_off"]}
+  ],
+  "211_fast_scan_down_alt": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_fast_b", "g_circle", "m_scan_v_fast_b", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_fast_a", "g_circle", "m_scan_v_fast_a", "s_off"]}
+  ],
+  "212_fast_scan_down_sync": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid_fast_a", "g_circle", "m_scan_v_fast_a", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid_fast_a", "g_circle", "m_scan_v_fast_a", "s_off"]}
+  ],
+
+  "213_fast_scan_strobe_mid": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_high", "g_open", "m_scan_v_fast_b", "s_mid"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_high", "g_open", "m_scan_v_fast_a", "s_mid"]}
+  ],
+  "214_fast_scan_strobe_fast": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_high", "g_open", "m_scan_v_fast_b", "s_fast"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_high", "g_open", "m_scan_v_fast_a", "s_fast"]}
+  ],
+
+  "215_random_slow": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_random_slow", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_random_slow", "s_off"]}
+  ],
+  "216_random_mid": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_random_mid", "s_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_random_mid", "s_off"]}
+  ],
+
+
+  "217_up": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_up"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_up"]}
+  ],
+  "218_up_strobe": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["d_mid", "g_circle", "m_up", "s_mid"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["d_mid", "g_circle", "m_up", "s_mid"]}
+  ],
+
+
+  "219_white": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["c_white"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["c_white"]}
+  ],
+  "220_blue": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["c_blue"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["c_blue"]}
+  ],
+  "221_orange": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["c_orange"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["c_orange"]}
+  ],
+  "222_blurange": [
+    {"fixture": "smartspotplus", "address": 21, "programs": ["c_blue_orange_2s_a"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["c_blue_orange_2s_b"]}
+  ],
 
   "31_blurange_alt": [
     {"fixture": "ministage", "address": 61, "programs": ["blurange_a"]},
@@ -41,162 +178,5 @@
   "36_white": [
     {"fixture": "ministage", "address": 61, "programs": ["white"]},
     {"fixture": "ministage", "address": 71, "programs": ["white"]}
-  ],
-
-  "slow_scan_right_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
-    ]}
-  ],
-  "slow_scan_H_alt": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_h_slow_b"
-    ]}
-  ],
-  "slow_scan_left_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
-    ]}
-  ],
-
-  "slow_scan_up_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
-    ]}
-  ],
-  "slow_scan_up_alt": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_v_slow_b"
-    ]}
-  ],
-  "slow_scan_down_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
-    ]}
-  ],
-  "slow_scan_down_alt": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_v_slow_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
-    ]}
-  ],
-
-  "fast_scan_up_alt": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_b"
-    ]}
-  ],
-  "fast_scan_up_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
-    ]}
-  ],"fast_scan_down_alt": [
-  {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_b"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
-    ]}
-  ],
-  "fast_scan_down_sync": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
-    ]}
-  ],
-  "fast_scan_strobe_mid": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_mid"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_a", "s_mid"
-    ]}
-  ],
-  "fast_scan_strobe_fast": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_fast"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_a", "s_fast"
-    ]}
-  ],
-  "random_fast_strobe_fast": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["random_full"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"
-    ]}
-  ],
-  "random_slow_strobe_fast": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_slow", "s_fast"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_slow", "s_fast"
-    ]}
-  ],
-  "random_fast_strobe_mid": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_mid"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_mid"
-    ]}
-  ],
-  "random_slow": [
-    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
-    {"fixture": "smartspotplus", "address": 21, "programs": [
-      "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
-    ]},
-    {"fixture": "smartspotplus", "address": 41, "programs": [
-      "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
-    ]}
-  ],
-  "up_white" : []
+  ]
 }

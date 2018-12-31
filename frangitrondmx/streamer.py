@@ -33,18 +33,22 @@ def elapsed(step=0):
     return (_elapsed // step) * step
 
 
-def _seed(step, function_, *args, **kwargs):
-    global _channel
-    random.seed(elapsed(step) + _channel)
+def _seed(step, per_channel, function_, *args, **kwargs):
+    if per_channel:
+        global _channel
+        random.seed(elapsed(step) + _channel)
+    else:
+        random.seed(elapsed(step))
+
     return function_(*args, **kwargs)
 
 
-def choice(iter_, step=0):
-    return _seed(step, random.choice, iter_)
+def choice(iter_, step=0, per_channel=True):
+    return _seed(step, per_channel, random.choice, iter_)
 
 
-def randint(min_, max_, step=0):
-    return _seed(step, random.randint, min_, max_)
+def randint(min_, max_, step=0, per_channel=True):
+    return _seed(step, per_channel, random.randint, min_, max_)
 
 
 class InterfaceThread(Thread):

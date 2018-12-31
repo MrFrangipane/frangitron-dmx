@@ -14,7 +14,8 @@
 
   "m_up": {
     "pan" : "$85",
-    "tilt" : "$131"
+    "tilt" : "$131",
+    "speed": "$0"
   },
 
   "m_scan_h_fast_a": {
@@ -76,6 +77,11 @@
     "tilt" : "$randint(0, 255, step=8.32)",
     "pan" : "$randint(0, 255, step=8.32)",
     "speed": "$255"
+  },
+  "m_random_mid": {
+    "tilt" : "$randint(0, 255, step=2.08)",
+    "pan" : "$randint(0, 255, step=2.08)",
+    "speed": "$200"
   },
 
   "g_wave": {
@@ -165,6 +171,9 @@
     "color": "$(123, 145)[elapsed() % 2.08 < 1.04]"
   },
 
+  "s_off": {
+    "strobe": "$0"
+  },
   "s_slow": {
     "strobe": "$150"
   },
