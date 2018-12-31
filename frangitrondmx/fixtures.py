@@ -104,6 +104,10 @@ class Fixture(object):
     def reload_programs(self):
         self.programs = dict()
 
+        if not path.isfile(self.programs_filepath):
+            with open(self.programs_filepath, "w") as f_programs:
+                f_programs.write(PROGRAM_TEMPLATE)
+
         with open(self.programs_filepath, 'r') as f_programs:
             try:
                 programs = json.load(f_programs)
