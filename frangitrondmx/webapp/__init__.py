@@ -36,7 +36,7 @@ def index():
     global _streamer
 
     if request.args.get('raspberrypi', False):
-        column_count = 4
+        column_count = 2
         footer = "<td><input id='reboot-gnome' type='submit' value='Reboot GNOME' class='raspi-only footer'></form></td>"
         footer += "<td><form method='POST' action='#'><input id='shutdown' type='submit' value='Shutdown' class='raspi-only footer'></form></td>"
         footer += "<td><form method='POST' action='#'><input id='restart-service' type='submit' value='Restart service' class='raspi-only footer'></form></td>"
@@ -54,6 +54,8 @@ def index():
     row_count = len(_streamer.program_names) / column_count
     cells = list()
 
+    spacing_rows = list()
+
     for row in range(row_count + 1):
         cells.append(list())
 
@@ -68,7 +70,14 @@ def index():
                 width='four' if request.args.get('landscape', False) else 'two'
             ))
 
+        program_first_letter_changed = _streamer.program_names[row][0] != _streamer.program_names[row - 1][0]
+        if program_first_letter_changed:
+            spacing_rows.append(row / column_count)
+
     if _streamer.programs:
+        for i, spacing_row in enumerate(spacing_rows):
+            cells.insert(spacing_row + i , ["<td>--</td>", "<td><td>"])
+
         programs_table = "<table><tr>{rows}</tr></table>".format(
             rows='</tr>\n<tr>'.join(['\n'.join(row) for row in cells])
         )
