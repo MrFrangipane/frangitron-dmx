@@ -86,6 +86,9 @@ class Streamer(object):
         self.interface_thread = InterfaceThread(parent=self)
         self.interface_thread.start()
 
+    def reset_expressions(self):
+        self.universe_expressions = ["0"] * 512
+
     def reset_state(self):
         self.state = State(context="Reset")
 

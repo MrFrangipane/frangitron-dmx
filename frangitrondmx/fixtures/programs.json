@@ -1,10 +1,50 @@
 {
-  "0_blackout": [
+  "00_blackout": [
     {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
+    {"fixture": "smartspotplus", "address": 21, "programs": ["0_off"]},
+    {"fixture": "smartspotplus", "address": 41, "programs": ["0_off"]},
+    {"fixture": "ministage", "address": 61, "programs": ["0_off"]},
+    {"fixture": "ministage", "address": 71, "programs": ["0_off"]}
+  ],
+  "01_laser_off": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]}
+  ],
+  "02_lyres_off": [
     {"fixture": "smartspotplus", "address": 21, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 41, "programs": ["0_off"]}
   ],
+  "03_pars_off": [
+    {"fixture": "ministage", "address": 61, "programs": ["0_off"]},
+    {"fixture": "ministage", "address": 71, "programs": ["0_off"]}
+  ],
+
+  "31_blurange_alt": [
+    {"fixture": "ministage", "address": 61, "programs": ["blurange_a"]},
+    {"fixture": "ministage", "address": 71, "programs": ["blurange_b"]}
+  ],
+  "32_blurange_sync": [
+    {"fixture": "ministage", "address": 61, "programs": ["blurange_a"]},
+    {"fixture": "ministage", "address": 71, "programs": ["blurange_a"]}
+  ],
+  "33_blue_orange": [
+    {"fixture": "ministage", "address": 61, "programs": ["blue"]},
+    {"fixture": "ministage", "address": 71, "programs": ["orange"]}
+  ],
+  "34_blue": [
+    {"fixture": "ministage", "address": 61, "programs": ["blue"]},
+    {"fixture": "ministage", "address": 71, "programs": ["blue"]}
+  ],
+  "35_orange": [
+    {"fixture": "ministage", "address": 61, "programs": ["orange"]},
+    {"fixture": "ministage", "address": 71, "programs": ["orange"]}
+  ],
+  "36_white": [
+    {"fixture": "ministage", "address": 61, "programs": ["white"]},
+    {"fixture": "ministage", "address": 71, "programs": ["white"]}
+  ],
+
   "slow_scan_right_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
     ]},
@@ -13,6 +53,7 @@
     ]}
   ],
   "slow_scan_H_alt": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "wookie600b", "address": 1, "programs": ["scan_V"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_a"
@@ -22,6 +63,7 @@
     ]}
   ],
   "slow_scan_left_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_h_slow_b"
     ]},
@@ -31,6 +73,7 @@
   ],
 
   "slow_scan_up_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
     ]},
@@ -39,6 +82,7 @@
     ]}
   ],
   "slow_scan_up_alt": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_a"
     ]},
@@ -47,6 +91,7 @@
     ]}
   ],
   "slow_scan_down_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_a", "g_circle", "m_scan_v_slow_b"
     ]},
@@ -55,6 +100,7 @@
     ]}
   ],
   "slow_scan_down_alt": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_slow_b", "g_circle", "m_scan_v_slow_a"
     ]},
@@ -64,6 +110,7 @@
   ],
 
   "fast_scan_up_alt": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
     ]},
@@ -72,6 +119,7 @@
     ]}
   ],
   "fast_scan_up_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
     ]},
@@ -79,6 +127,7 @@
       "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_a"
     ]}
   ],"fast_scan_down_alt": [
+  {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_fast_b", "g_circle", "m_scan_v_fast_b"
     ]},
@@ -87,6 +136,7 @@
     ]}
   ],
   "fast_scan_down_sync": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid_fast_a", "g_circle", "m_scan_v_fast_a"
     ]},
@@ -95,6 +145,7 @@
     ]}
   ],
   "fast_scan_strobe_mid": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_mid"
     ]},
@@ -103,6 +154,7 @@
     ]}
   ],
   "fast_scan_strobe_fast": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_high", "g_open", "m_scan_v_fast_b", "s_fast"
     ]},
@@ -111,6 +163,7 @@
     ]}
   ],
   "random_fast_strobe_fast": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["random_full"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_fast"
     ]},
@@ -119,6 +172,7 @@
     ]}
   ],
   "random_slow_strobe_fast": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_high", "g_open", "m_random_slow", "s_fast"
     ]},
@@ -127,6 +181,7 @@
     ]}
   ],
   "random_fast_strobe_mid": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_high", "g_open", "m_random_fast", "s_mid"
     ]},
@@ -135,11 +190,13 @@
     ]}
   ],
   "random_slow": [
+    {"fixture": "wookie600b", "address": 1, "programs": ["0_off"]},
     {"fixture": "smartspotplus", "address": 21, "programs": [
       "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
     ]},
     {"fixture": "smartspotplus", "address": 41, "programs": [
       "0_off", "c_white", "d_mid", "g_circle", "m_random_slow"
     ]}
-  ]
+  ],
+  "up_white" : []
 }

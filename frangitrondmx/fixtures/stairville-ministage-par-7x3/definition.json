@@ -1,0 +1,47 @@
+{
+  "name": "ministage",
+  "caption": "Stairville Ministage PAR 7x3",
+  "doc": [
+    "LED PAR RGB - 5 CH DMX mode",
+    "MODE : XX-X",
+    "CH61 : X-XXXX----",
+    "CH71 : XXX---X---"
+  ],
+  "mapping": {
+    "1": {
+      "name": "mode",
+      "role": "Mode",
+      "doc": [
+        "000 - 063 : RGB on CH2, CH3, CH4",
+        "064 - 127 : 7 colour fade, CH5 as speed",
+        "128 - 191 : 7 colour step, CH5 as speed",
+        "192 - 255 : 3 colour step, CH5 as speed"
+      ]
+    },
+    "2": {
+      "name": "red",
+      "role": "Red",
+      "doc": "000 - 255 : from dark to bright"
+    },
+    "3": {
+      "name": "green",
+      "role": "Green",
+      "doc": "000 - 255 : from dark to bright"
+    },
+    "4": {
+      "name": "blue",
+      "role": "Blue",
+      "doc": "000 - 255 : from dark to bright"
+    },
+    "5": {
+      "name": "sensitivity",
+      "role": "Speed / Sound sensitivity",
+      "doc": [
+        "000 - 010 : No function",
+        "011 - 100 : Speed from fast to slow",
+        "101 - 150 : No function",
+        "151 - 255 : Speed from music (potentiometer)"
+      ]
+    }
+  }
+}

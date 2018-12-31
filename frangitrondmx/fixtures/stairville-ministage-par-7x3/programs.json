@@ -1,0 +1,62 @@
+{
+  "0_off": {
+    "mode": "0",
+    "red": "0",
+    "green": "0",
+    "blue": "0"
+  },
+  "blue": {
+    "mode": "$0",
+    "red": "$0",
+    "green": "$16",
+    "blue": "$255"
+  },
+  "orange": {
+    "mode": "$0",
+    "red": "$255",
+    "green": "$128",
+    "blue": "$0"
+  },
+  "blue_wave_a": {
+    "mode": "$0",
+    "red": "$0",
+    "green": "$lerp(5, 16, cos2(elapsed()))",
+    "blue": "$lerp(85, 255, cos2(elapsed()))"
+  },
+  "blue_wave_b": {
+    "mode": "$0",
+    "red": "$0",
+    "green": "$lerp(5, 16, sin2(elapsed()))",
+    "blue": "$lerp(85, 255, sin2(elapsed()))"
+  },
+  "orange_wave_a": {
+    "mode": "$0",
+    "red": "$lerp(85, 255, cos2(elapsed()))",
+    "green": "$lerp(43, 128, cos2(elapsed()))",
+    "blue": "$0"
+  },
+  "orange_wave_b": {
+    "mode": "$0",
+    "red": "$lerp(85, 255, sin2(elapsed()))",
+    "green": "$lerp(43, 128, sin2(elapsed()))",
+    "blue": "$0"
+  },
+  "blurange_a": {
+    "mode": "$0",
+    "red": "$lerp(0, 255, cos2(elapsed() / 2))",
+    "green": "$lerp(16, 128, cos2(elapsed() / 2))",
+    "blue": "$lerp(255, 0, cos2(elapsed() / 2))"
+  },
+  "blurange_b": {
+    "mode": "$0",
+    "red": "$lerp(0, 255, sin2(elapsed() / 2))",
+    "green": "$lerp(16, 128, sin2(elapsed() / 2))",
+    "blue": "$lerp(255, 0, sin2(elapsed() / 2))"
+  },
+  "white": {
+    "mode": "$0",
+    "red": "$255",
+    "green": "$255",
+    "blue": "$255"
+  }
+}

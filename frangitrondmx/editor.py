@@ -100,6 +100,7 @@ class MainWindow(QWidget):
     def fixture_changed(self):
         self.current_fixture = self.streamer.fixtures[self.combo_fixture.currentText()]
         self.address_changed()
+        self.streamer.reset_expressions()
         with open(self.current_fixture.programs_filepath, 'r') as f_programs:
             self.text.setPlainText(f_programs.read())
 
