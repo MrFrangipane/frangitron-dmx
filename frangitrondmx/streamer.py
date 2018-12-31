@@ -191,7 +191,7 @@ class Streamer(object):
                     exception=e
                 )
                 return bytearray([0] * 513)
-
+        print list(universe[0:30])
         self.state = State(context="Computed")
         return universe
 
